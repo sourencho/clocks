@@ -11,14 +11,14 @@ function create_clock(x,y,r,s)
     return c
 end
 
-function clock_update(c)
+function update_clock(c)
     c.a = -t()/c.s % 1.0
 
     c.xe = c.r*cos(c.a) + c.x;
     c.ye = c.r*sin(c.a) + c.y;
 end
 
-function clock_draw(c)
+function draw_clock(c)
     -- draw base
     rectfill(12,12,118,118,1)
     map(0, 0, 0, 0, 16, 16)
