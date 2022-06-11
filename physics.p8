@@ -82,14 +82,10 @@ function all_collide_objgroup(obj,groupname)
     return list
 end
 
-function collides(x,y)
-    return contains(coll_map[x], y)
-end
-
 function draw_debug_coll(o)
     if SHOW_DEBUG then
         local c = 8
-        if o.name == "cauldron" then
+        if o.name == "player" then
             c = 9
         elseif o.name == "wall" then 
             c = 12 

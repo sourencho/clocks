@@ -1,3 +1,24 @@
+function draw_noop(o)
+    draw_debug_coll(o)
+end
+
+function draw_circ(o)
+    circ(o.x, o.y, o.w+1, 1)
+end
+
+function draw_line(a,b,clr)
+    line(a.x, a.y, b.x, b.y, clr)
+end
+
+function draw_rect(o)
+    local x1,y1,x2,y2=o.x-o.w/2,o.y-o.h/2,o.x+o.w/2,o.y+o.h/2
+    rect(x1,y1,x2,y2,o.clr)
+    if o.clr_fill then
+        rectfill(x1+1,y1+1,x2-1,y2-1,o.clr_fill)
+    end
+    draw_debug_coll(o)
+end
+
 function draw_anim(x, y, char, state, t, xflip, is_player)
     local sinfo = anim_info[char][state]
     local spri = sinfo.sprites[flr(t/sinfo.dt)%#sinfo.sprites+1]
@@ -33,4 +54,5 @@ function draw_self(s)
     foo(s)
     if s.whiteframe then all_colors_to() s.whiteframe=false end
     --]]
+    draw_debug_coll(s)
 end

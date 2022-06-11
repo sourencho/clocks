@@ -8,6 +8,12 @@ function create_clock(x,y,r,s)
         a=0,
         s=s --speed
     }
+
+    create_wall(11,64,7,112,nil)
+    create_wall(128-10,64,7,112,nil)
+    create_wall(64,11,112,7,nil)
+    create_wall(64,128-9,112,7,nil)
+
     return c
 end
 

@@ -10,7 +10,7 @@ function create_player(x, y)
         decx=0.6,
         decy=0.6,
         w=6,
-        h=3,
+        h=6,
         animt=0,
         faceleft=true,
         name="player",
@@ -34,7 +34,7 @@ function update_player(p)
     if btn(3) then movy+=p.acc end
 
     -- move
-    update_movement(p,movx,movy,false)
+    update_movement(p,movx,movy,true,true)
 
     -- state
     local newstate

@@ -6,6 +6,7 @@ __lua__
 #include physics.p8
 #include graphics.p8
 #include player.p8
+#include static.p8
 #include core.p8
 #include util.p8
 #include clock.p8

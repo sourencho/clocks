@@ -1,6 +1,11 @@
+-- GAME
+
+SHOW_DEBUG = false
+
 -- OBJECT
 objs={
     player={},
+    static={},
     to_update={},
     to_draw0={},
     to_draw1={},
