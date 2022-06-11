@@ -50,5 +50,10 @@ function update_player(p)
 end
 
 function draw_player(p)
+    -- shadow
+    line(p.x-2, p.y+2, p.x+1, p.y+2, 0)
+    line(p.x-3, p.y+3, p.x+2, p.y+3, 0)
+    line(p.x-2, p.y+4, p.x+1, p.y+4, 0)
+
     draw_self(p)
 end
