@@ -1,8 +1,7 @@
 clock = nil
 
 function _init()
-    --init_board()
-    clock = create_clock(64,64,40,8)
+    clock = create_clock(64,64,34,12)
 end
 
 function _update()
@@ -11,7 +10,6 @@ end
 
 function _draw()
     cls()
-    --draw_board()
-    map(0, 0, 0, 0, 16, 16) 
+    map(0, 0, 0, 0, 16, 16)
     clock_draw(clock)
 end
