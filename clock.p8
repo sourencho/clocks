@@ -31,7 +31,8 @@ function draw_clock(c)
     map(0, 0, 0, 0, 16, 16)
 
     -- draw hand
-    line(c.x, c.y, c.xe, c.ye, 9)
+    linefill(c.x, c.y, c.xe, c.ye, 1, 9)
+
 
     -- draw center
     circfill(64,65,3,6)

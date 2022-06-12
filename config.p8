@@ -24,7 +24,7 @@ function init_anim_info()
             },
             run={
                 sprites={25, 26, 27, 28, 29},
-                dt=0.02
+                dt=0.015
             },
         }
     }

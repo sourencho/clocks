@@ -8,6 +8,7 @@ __lua__
 #include player.p8
 #include static.p8
 #include core.p8
+#include graphics_util.p8
 #include util.p8
 #include clock.p8
 __gfx__
