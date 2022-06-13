@@ -22,7 +22,7 @@ function create_player(x, y)
         immune=false,
         immune_until=0,
         whiteframe=0,
-        flash_clr=8
+        flash_clr=1,
     }
 
     register_object(p)
@@ -71,6 +71,7 @@ function hit_clock(p, c)
     else
         p.immune = true
         p.immune_until = time() + 2
-        p.whiteframe=4
+        p.whiteframe=2*30
+        add_shake(4)
     end
 end

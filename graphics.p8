@@ -47,17 +47,32 @@ function draw_self(s)
               end
 
     -- foo + whiteframe
-    if (s.whiteframe != nil and s.whiteframe > 0) then
+    if (s.whiteframe != nil and s.whiteframe > 0 and t() % 0.1 < 0.01) then
         all_colors_to(s.flash_clr or 6)
     end
 
     foo(s)
 
     all_colors_to()
-    if (s.whiteframe != nil) then
+    if (s.whiteframe != nil and t()) then
         s.whiteframe = max(s.whiteframe-1, 0)
     end
 
     -- debug
     draw_debug_coll(s)
+end
+
+function add_shake(p)
+    local a=rnd(1)
+    shkx+=p*cos(a)
+    shky+=p*sin(a)
+end
+
+function update_shake()
+    if abs(shkx)+abs(shky)<0.5 then
+        shkx,shky=0,0
+    else
+        shkx*=-0.5-rnd(0.2)
+        shky*=-0.5-rnd(0.2)
+    end
 end
