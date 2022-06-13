@@ -16,6 +16,12 @@ function draw_objects()
         local dobjs=objs["to_draw"..i]
         for obj in all(dobjs) do
             obj.draw(obj)
+
+        if (SHOW_DEBUG) then
+            if (obj.draw_debug != nill) then
+                obj.draw_debug()
+            end
+        end
         end
     end
 end

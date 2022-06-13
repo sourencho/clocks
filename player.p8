@@ -15,9 +15,14 @@ function create_player(x, y)
         faceleft=true,
         name="player",
         state="idle",
-        regs={"to_update","to_draw3", "player"},
+        regs={"to_update","to_draw3", "player", "hit_clock"},
+        update=update_player,
         draw=draw_player,
-        update=update_player
+        hit_clock=hit_clock,
+        immune=false,
+        immune_until=0,
+        whiteframe=0,
+        flash_clr=8
     }
 
     register_object(p)
@@ -47,6 +52,9 @@ function update_player(p)
     if newstate ~= p.state then
         p.state, p.animt = newstate, 0
     end
+
+    -- immunitiy
+    p.immune = time() < p.immune_until
 end
 
 function draw_player(p)
@@ -56,4 +64,13 @@ function draw_player(p)
     line(p.x-2, p.y+4, p.x+1, p.y+4, 0)
 
     draw_self(p)
+end
+
+function hit_clock(p, c)
+    if (p.immune) then 
+    else
+        p.immune = true
+        p.immune_until = time() + 2
+        p.whiteframe=4
+    end
 end

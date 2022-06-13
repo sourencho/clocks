@@ -2,13 +2,15 @@ pico-8 cartridge // http://www.pico-8.com
 version 34
 __lua__
 #include config.p8
+#include core.p8
 #include object.p8
 #include physics.p8
 #include graphics.p8
 #include player.p8
 #include static.p8
-#include core.p8
+#include coroutine.p8
 #include graphics_util.p8
+#include physics_util.p8
 #include util.p8
 #include clock.p8
 __gfx__

@@ -39,20 +39,25 @@ end
 
 
 function draw_self(s)
+    -- sprite
     local foo=function(s)
                local state=s.state or "only"
                local z=s.z or 0
                draw_anim(s.x, s.y-1, s.name, state, s.animt, s.faceleft)
               end
 
+    -- foo + whiteframe
+    if (s.whiteframe != nil and s.whiteframe > 0) then
+        all_colors_to(s.flash_clr or 6)
+    end
+
     foo(s)
-    --[[
-    local c
-    if s.whiteframe then c=7 end
-    draw_outline(foo,c,s)
-    if s.whiteframe then all_colors_to(7) end
-    foo(s)
-    if s.whiteframe then all_colors_to() s.whiteframe=false end
-    --]]
+
+    all_colors_to()
+    if (s.whiteframe != nil) then
+        s.whiteframe = max(s.whiteframe-1, 0)
+    end
+
+    -- debug
     draw_debug_coll(s)
 end

@@ -6,6 +6,7 @@ SHOW_DEBUG = false
 objs={
     player={},
     static={},
+    hit_clock={},
     to_update={},
     to_draw0={},
     to_draw1={},

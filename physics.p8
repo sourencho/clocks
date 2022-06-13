@@ -72,14 +72,18 @@ function collide_objobj(obj1,obj2)
             abs(obj1.y-obj2.y)<(obj1.h+obj2.h)/2)
 end
 
-function all_collide_objgroup(obj,groupname)
+function all_collide_objgroup(obj,groupname,coll_func)
     local list={}
     for obj2 in group(groupname) do
-        if obj2~=obj and collide_objobj(obj,obj2) then
+        if obj2~=obj and coll_func(obj,obj2) then
             add(list,obj2)
         end
     end
     return list
+end
+
+function line_collide_objobj(obj1,obj2)
+    return aabb_line_intersect(obj2, obj1.get_line())
 end
 
 function draw_debug_coll(o)

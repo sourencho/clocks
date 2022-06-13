@@ -41,3 +41,15 @@ function linefill(ax,ay,bx,by,r,c)
     end
 
 end
+
+function all_colors_to(c)
+    if c then
+        for i=0,15 do
+            pal(i,c)
+        end
+    else
+        for i=0,15 do
+            pal(i,i)
+        end
+    end
+end
