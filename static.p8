@@ -8,7 +8,7 @@ function create_wall(x,y,w,h,clr,clr_fill)
         clr_fill=clr_fill,
         name="wall",
         draw=tern(clr == nil, draw_noop, draw_rect),
-        regs={"to_draw1","static"},
+        regs={"to_draw4","static"},
     }
 
     register_object(w)

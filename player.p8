@@ -18,7 +18,7 @@ function create_player(x, y)
         regs={"to_update","to_draw3", "player", "hit_clock"},
         update=update_player,
         draw=draw_player,
-        hit_clock=hit_clock,
+        hit_clock=hit_clock_player,
         immune=false,
         immune_until=0,
         whiteframe=0,
@@ -66,12 +66,12 @@ function draw_player(p)
     draw_self(p)
 end
 
-function hit_clock(p, c)
+function hit_clock_player(p, c)
     if (p.immune) then 
     else
         p.immune = true
-        p.immune_until = time() + 2
-        p.whiteframe=2*30
+        p.immune_until = time() + 1
+        p.whiteframe=1*30
         add_shake(4)
     end
 end
