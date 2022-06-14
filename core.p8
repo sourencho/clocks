@@ -15,7 +15,8 @@ function _draw()
     xmod,ymod=flr(camx+shkx),flr(camy+shky)
 
     cls()
-    map(0, 0, 0, 0, 16, 16)
+
+    draw_background()
     draw_objects()
 
     camera(xmod,ymod)
@@ -25,4 +26,12 @@ function spawn_objects()
     create_clock(64,64,44,3)
     create_player(80,80)
     create_tree(40, 40)
+end
+
+function draw_background()
+    -- Pattern made using https://seansleblanc.itch.io/pico-8-fillp-tool
+    rectfill(-20,-20,148,148,1)
+    fillp(0B1000010100100000.1)
+    rectfill(-20,-20,148,148,0)
+    fillp()
 end
