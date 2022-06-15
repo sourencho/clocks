@@ -53,3 +53,21 @@ function all_colors_to(c)
         end
     end
 end
+
+function draw_outline(draw,c,arg)
+    local c=c or 0
+
+    all_colors_to(c)
+
+    camera(xmod-1,ymod)
+    draw(arg)
+    camera(xmod+1,ymod)
+    draw(arg)
+    camera(xmod,ymod-1)
+    draw(arg)
+    camera(xmod,ymod+1)
+    draw(arg)
+
+    camera(xmod,ymod)
+    all_colors_to()
+end

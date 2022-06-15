@@ -46,7 +46,7 @@ function hit_clock_tree(t, c)
 
         t.state_index += 1
         if (t.state_index > #states_tree) then
-            deregister_object(t)
+            --deregister_object(t)
         else
             t.state = states_tree[t.state_index] 
             if (t.state == "tree_fruit") then

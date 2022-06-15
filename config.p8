@@ -7,6 +7,7 @@ objs={
     player={},
     static={},
     hit_clock={},
+    hit_player={},
     to_update={},
     to_draw0={},
     to_draw1={},
@@ -55,6 +56,16 @@ function init_anim_info()
                 sprites={57},
                 dt=0.1
             }
+        },
+        season={
+            summer={
+                sprites={55},
+                dt=0.1
+            },
+            cloud={
+                sprites={59},
+                dt=0.1
+            },
         }
     }
 end

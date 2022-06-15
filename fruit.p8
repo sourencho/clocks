@@ -14,10 +14,11 @@ function create_fruit(x, y)
         faceleft=true,
         name="fruit",
         state="idle",
-        regs={"to_update","to_draw2", "hit_clock"},
+        regs={"to_update","to_draw2", "hit_clock", "hit_player"},
         update=update_fruit,
         draw=draw_self,
         hit_clock=hit_clock_fruit,
+        hit_player=hit_player_fruit,
         immune=false,
         immune_until=0,
     }
@@ -43,4 +44,9 @@ function hit_clock_fruit(o, c)
 
         deregister_object(o)
     end
+end
+
+function hit_player_fruit(o, p)
+    p.score += 1
+    deregister_object(o)
 end

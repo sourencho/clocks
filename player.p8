@@ -23,6 +23,7 @@ function create_player(x, y)
         immune_until=0,
         whiteframe=0,
         flash_clr=1,
+        score=0,
     }
 
     register_object(p)
@@ -53,6 +54,12 @@ function update_player(p)
         p.state, p.animt = newstate, 0
     end
 
+    -- collision
+    local hits=all_collide_objgroup(p,"hit_player",collide_objobj) 
+    for h in all(hits) do
+        h:hit_player(p)
+    end
+
     -- immunitiy
     p.immune = time() < p.immune_until
 end
@@ -62,6 +69,8 @@ function draw_player(p)
     line(p.x-2, p.y+2, p.x+1, p.y+2, 0)
     line(p.x-3, p.y+3, p.x+2, p.y+3, 0)
     line(p.x-2, p.y+4, p.x+1, p.y+4, 0)
+
+    print(p.score, 2, 2, 6)
 
     draw_self(p)
 end
