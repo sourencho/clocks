@@ -1,13 +1,15 @@
 function _init()
     cls()
+    drk=parse"0=0,0,1,1,2,1,5,13,2,4,9,3,1,1,2,4"
     shkx, shky, camx, camy, xmod, ymod = 0,0,0,0,0,0
+    floatxts={}
     init_anim_info()
     spawn_objects()
 end
 
 function _update()
+    update_text()
     update_shake()
-
     update_cors(global_cors)
     update_objects()
 end
@@ -19,6 +21,7 @@ function _draw()
 
     draw_background()
     draw_objects()
+    draw_texts()
 
     camera(xmod,ymod)
 end
@@ -36,4 +39,12 @@ function draw_background()
     fillp(0B1000010100100000.1)
     rectfill(-20,-20,148,148,0)
     fillp()
+end
+
+function draw_texts()
+    for txt in all(floatxts) do
+        local c1,c2=txt.c1,txt.c2
+        if txt.t>1.8 then c1,c2=drk[c1],drk[c2] end
+        draw_text(txt.str,txt.x,txt.y,1,c1,c2)
+    end
 end

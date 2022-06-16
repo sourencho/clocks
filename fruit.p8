@@ -49,5 +49,6 @@ end
 
 function hit_player_fruit(o, p)
     p.score += 1
+    create_text(p.x, p.y, "+1", 7, 0)
     deregister_object(o)
 end

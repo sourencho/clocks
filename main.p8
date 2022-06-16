@@ -10,6 +10,7 @@ __lua__
 #include static.p8
 #include coroutine.p8
 #include particle.p8
+#include text.p8
 #include graphics_util.p8
 #include physics_util.p8
 #include util.p8
