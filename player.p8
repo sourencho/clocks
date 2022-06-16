@@ -82,5 +82,6 @@ function hit_clock_player(p, c)
         p.immune_until = time() + 1
         p.whiteframe=1*30
         add_shake(4)
+        cloud_particles(p.x, p.y, 0.5, {3,4}, 8, {9,10})
     end
 end

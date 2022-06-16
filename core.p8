@@ -7,6 +7,7 @@ end
 
 function _update()
     update_shake()
+
     update_cors(global_cors)
     update_objects()
 end
@@ -23,10 +24,10 @@ function _draw()
 end
 
 function spawn_objects()
-    create_clock(64,64,44,3)
+    create_clock(64,64,44,2)
     create_player(80,80)
     create_tree(40, 40)
-    create_season(40, 80)
+    --create_season(40, 80)
 end
 
 function draw_background()

@@ -43,6 +43,7 @@ function hit_clock_tree(t, c)
     else
         make_immune(t, 0.2)
         add_shake(1)
+        cloud_particles(t.x, t.y-1, 0.5, {3,4}, 8, {7})
 
         t.state_index += 1
         if (t.state_index > #states_tree) then

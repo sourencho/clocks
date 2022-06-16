@@ -41,6 +41,7 @@ function hit_clock_fruit(o, c)
     else
         make_immune(o, 0.2)
         add_shake(1)
+        cloud_particles(o.x, o.y-1, 0.5, {3,4}, 8, {7})
 
         deregister_object(o)
     end
