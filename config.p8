@@ -1,6 +1,14 @@
 -- GAME
 
-SHOW_DEBUG = false
+SHOW_DEBUG_OBJ = false
+SHOW_DEBUG_GRID = false
+
+-- GRID
+GRID_START_X = 2
+GRID_START_Y = 2
+GRID_WIDTH = 12
+GRID_HEIGHT = 12
+GRID_INVALIDS = {{7,7}, {7,8}, {8,7}, {8,8}}
 
 -- OBJECT
 objs={

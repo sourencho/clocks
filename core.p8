@@ -4,6 +4,7 @@ function _init()
     shkx, shky, camx, camy, xmod, ymod = 0,0,0,0,0,0
     floatxts={}
     init_anim_info()
+    init_grid(GRID_START_X, GRID_START_Y, GRID_WIDTH, GRID_HEIGHT)
     spawn_objects()
 end
 
@@ -23,11 +24,15 @@ function _draw()
     draw_objects()
     draw_texts()
 
+    if SHOW_DEBUG_GRID then
+        draw_grid_debug()
+    end
+
     camera(xmod,ymod)
 end
 
 function spawn_objects()
-    create_clock(64,64,44,2)
+    create_clock(64,64,44,3)
     create_player(80,80)
     create_tree(40, 40)
     --create_season(40, 80)

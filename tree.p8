@@ -1,7 +1,14 @@
 states_tree = {"sapling", "bush", "tree", "tree_fruit", "tree_dry"}
 
 function create_tree(x, y)
-    local t = {
+    local t = {}
+    local valid, x, y, i, j = add_grid_xy(x, y, t)
+    if (not valid) then
+        return
+    end
+
+
+    t = {
         x=x,
         y=y,
         vx=0,

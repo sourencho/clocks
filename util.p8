@@ -58,8 +58,15 @@ function parse(str,ar)
     end
     
     return ar
-   end
+end
+
+function get_grid_coord(x,y)
+    return flr(x/8),flr(y/8)
+end
 
 function tern(cond, T, F) if cond then return T else return F end end
 function pick(ar,k) k=k or #ar return ar[flr(rnd(k))+1] end
 function lerp(var,target,pow) return var+pow*(target-var) end
+function dist(xa,ya) return sqrt(sqrdist(xa,ya)) end
+function sqrdist(x,y) return x*x+y*y end
+function frnd(a) return flr(rnd(a)) end

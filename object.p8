@@ -17,7 +17,7 @@ function draw_objects()
         for obj in all(dobjs) do
             obj.draw(obj)
 
-        if (SHOW_DEBUG) then
+        if (SHOW_DEBUG_OBJ) then
             if (obj.draw_debug != nill) then
                 obj.draw_debug()
             end

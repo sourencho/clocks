@@ -6,6 +6,7 @@ __lua__
 #include object.p8
 #include physics.p8
 #include graphics.p8
+#include grid.p8
 #include player.p8
 #include static.p8
 #include coroutine.p8

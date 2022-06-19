@@ -1,4 +1,10 @@
 function create_fruit(x, y)
+    local t = {}
+    local valid, x, y, i, j = add_grid_xy(x, y, t)
+    if (not valid) then
+        return
+    end
+
     local t = {
         x=x,
         y=y,
@@ -21,6 +27,8 @@ function create_fruit(x, y)
         hit_player=hit_player_fruit,
         immune=false,
         immune_until=0,
+        i=i,
+        j=j
     }
 
     make_immune(t, 1)
@@ -43,12 +51,12 @@ function hit_clock_fruit(o, c)
         add_shake(1)
         cloud_particles(o.x, o.y-1, 0.5, {3,4}, 8, {7})
 
-        deregister_object(o)
+        deregister_grid_object(o)
     end
 end
 
 function hit_player_fruit(o, p)
     p.score += 1
     create_text(p.x, p.y, "+1", 7, 0)
-    deregister_object(o)
+    deregister_grid_object(o)
 end

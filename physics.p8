@@ -87,7 +87,7 @@ function line_collide_objobj(obj1,obj2)
 end
 
 function draw_debug_coll(o)
-    if SHOW_DEBUG then
+    if SHOW_DEBUG_OBJ then
         local c = 8
         if o.name == "player" then
             c = 9

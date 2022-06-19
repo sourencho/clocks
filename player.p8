@@ -15,7 +15,7 @@ function create_player(x, y)
         faceleft=true,
         name="player",
         state="idle",
-        regs={"to_update","to_draw3", "player", "hit_clock"},
+        regs={"to_update","to_draw3", "player"},
         update=update_player,
         draw=draw_player,
         hit_clock=hit_clock_player,
@@ -38,6 +38,11 @@ function update_player(p)
     if btn(1) then movx+=p.acc p.faceleft=false end
     if btn(2) then movy-=p.acc end
     if btn(3) then movy+=p.acc end
+
+
+    if btnp(4) then
+        create_tree(p.x + tern(p.faceleft, -8, 8), p.y-1)
+    end
 
     -- move
     update_movement(p,movx,movy,true,true)
