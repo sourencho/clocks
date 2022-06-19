@@ -44,6 +44,10 @@ function update_player(p)
         create_tree(p.x + tern(p.faceleft, -8, 8), p.y-1)
     end
 
+    if btnp(5) then
+        SHOW_DEBUG_OBJ = not SHOW_DEBUG_OBJ
+    end
+
     -- move
     update_movement(p,movx,movy,true,true)
 

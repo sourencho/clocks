@@ -31,6 +31,29 @@ function draw_square_cor(data)
     end
 end
 
+-- c is a grid cell
+function draw_grid_rain_cor(c)
+    local start_x=c.x + tern(rnd()>0.5, -8, 8)
+    local start_y=-4
+    local end_x=c.x
+    local end_y=c.y
+    local n = (end_y - start_y)/8
+    local x, y
+    for i=0,n do
+        x = lerp(start_x, end_x, i/n)
+        y = lerp(start_y, end_y, i/n)
+        line(x, y, x, y+1, 12)
+        yield()
+    end
+    for r=2,4 do
+        circ(x, y, r/2, 12)
+        yield()
+    end
+    if (c.obj != nil and c.obj.hit_rain != nil) then
+        c.obj:hit_rain()
+    end
+end
+
 function draw_anim(x, y, char, state, t, xflip, is_player)
     local sinfo = anim_info[char][state]
     local spri = sinfo.sprites[flr(t/sinfo.dt)%#sinfo.sprites+1]

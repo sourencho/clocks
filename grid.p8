@@ -4,6 +4,8 @@ function init_grid(start_x, start_y, width, height)
         grid[i] = {}
         for j=0,15 do
             local e = {
+                i=i,
+                j=j,
                 x=j*8+4,
                 y=i*8+4,
                 obj=nil,
@@ -32,23 +34,31 @@ function draw_grid_debug()
     end
 end
 
-function add_grid(i, j, o)
-    local cell = grid[i][j]
-    if (not cell.valid or cell.obj ~= nil) then
-        return false, nil, nil
-    end
-
-    cell.obj = o
-    return true, cell.x, cell.y
+function is_cell_invalid(c)
+    return not c.valid or c.obj ~= nil
 end
 
-function add_grid_xy(x, y, o)
+function get_cell(x, y)
     j,i = get_grid_coord(x,y)
-    valid, x, y = add_grid(i, j, t)
-    return valid, x, y, i, j
+    return grid[i][j]
 end
 
 function deregister_grid_object(o)
     grid[o.i][o.j].obj = nil
     deregister_object(o)
+end
+
+function register_grid_object(o, i, j)
+    grid[i][j].obj = o
+    register_object(o)
+end
+
+
+-- todo: make this more efficient and deterministic
+function get_rnd_valid_grid_cell()
+    local c = {valid = false} 
+    while not c.valid do
+        c = grid[frnd(15)][frnd(15)]
+    end
+    return c
 end

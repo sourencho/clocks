@@ -1,17 +1,15 @@
-states_tree = {"sapling", "bush", "tree", "tree_fruit", "tree_dry"}
+states_tree = {"sapling", "bush", "tree", "tree_dry"}
 
 function create_tree(x, y)
-    local t = {}
-    local valid, x, y, i, j = add_grid_xy(x, y, t)
-    if (not valid) then
+    local c = get_cell(x, y)
+    if (is_cell_invalid(c)) then
         draw_cors[cocreate(draw_square_cor)] = {x=j*8,y=i*8,s=7,c=8}
         return
     end
 
-
-    t = {
-        x=x,
-        y=y,
+    local t = {
+        x=c.x,
+        y=c.y,
         vx=0,
         vy=0,
         acc=1.1,
@@ -29,13 +27,14 @@ function create_tree(x, y)
         update=update_tree,
         draw=draw_self,
         hit_clock=hit_clock_tree,
+        hit_rain=hit_rain_tree,
         immune=false,
         immune_until=0,
     }
 
     make_immune(t, 1)
 
-    register_object(t)
+    register_grid_object(t, c.i, c.j)
 end
 
 function update_tree(t)
@@ -50,7 +49,6 @@ function hit_clock_tree(t, c)
         -- noop
     else
         make_immune(t, 0.2)
-        add_shake(1)
         cloud_particles(t.x, t.y-1, 0.5, {3,4}, 8, {7})
 
         t.state_index += 1
@@ -58,11 +56,16 @@ function hit_clock_tree(t, c)
             --deregister_object(t)
         else
             t.state = states_tree[t.state_index] 
-            if (t.state == "tree_fruit") then
-                create_fruit(t.x - 8, t.y)
-                create_fruit(t.x + 8, t.y)
-            end
         end
+    end
+end
+
+function hit_rain_tree(t)
+    if t.state == "tree" then
+        t.state = "tree_fruit"
+        create_fruit(t.x - 8, t.y)
+        create_fruit(t.x + 8, t.y)
+        cloud_particles(t.x, t.y-1, 0.5, {3,4}, 8, {12})
     end
 end
 
