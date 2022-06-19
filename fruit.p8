@@ -2,6 +2,7 @@ function create_fruit(x, y)
     local t = {}
     local valid, x, y, i, j = add_grid_xy(x, y, t)
     if (not valid) then
+        draw_cors[cocreate(draw_square_cor)] = {x=j*8,y=i*8,s=7,c=8}
         return
     end
 

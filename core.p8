@@ -11,7 +11,6 @@ end
 function _update()
     update_text()
     update_shake()
-    update_cors(global_cors)
     update_objects()
 end
 
@@ -22,6 +21,7 @@ function _draw()
 
     draw_background()
     draw_objects()
+    update_cors(draw_cors)
     draw_texts()
 
     if SHOW_DEBUG_GRID then

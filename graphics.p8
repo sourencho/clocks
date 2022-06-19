@@ -2,10 +2,6 @@ function draw_noop(o)
     draw_debug_coll(o)
 end
 
-function draw_circ(o)
-    circ(o.x, o.y, o.w+1, 1)
-end
-
 function draw_line(a,b,clr)
     line(a.x, a.y, b.x, b.y, clr)
 end
@@ -17,6 +13,22 @@ function draw_rect(o)
         rectfill(x1+1,y1+1,x2-1,y2-1,o.clr_fill)
     end
     draw_debug_coll(o)
+end
+
+function draw_circ_cor(data)
+    for i=0,10 do
+        circ(data.x, data.y, data.r, data.c)
+        yield()
+    end
+end
+
+function draw_square_cor(data)
+    for i=0,10 do
+        if (i % 4 == 0) then 
+            rect(data.x, data.y, data.x+data.s, data.y+data.s, data.c)
+        end
+        yield()
+    end
 end
 
 function draw_anim(x, y, char, state, t, xflip, is_player)
