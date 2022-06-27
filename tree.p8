@@ -23,13 +23,15 @@ function create_tree(x, y)
         name="tree",
         state=states_tree[1],
         state_index = 1,
-        regs={"to_update","to_draw2", "hit_clock"},
+        regs={"to_update","to_draw2", "hit_clock", "holdable"},
         update=update_tree,
         draw=draw_self,
         hit_clock=hit_clock_tree,
         hit_rain=hit_rain_tree,
         immune=false,
         immune_until=0,
+        i=i,
+        j=j
     }
 
     make_immune(t, 1)
@@ -49,12 +51,12 @@ function hit_clock_tree(t, c)
         -- noop
     else
         make_immune(t, 0.2)
-        cloud_particles(t.x, t.y-1, 0.5, {3,4}, 8, {7})
 
         t.state_index += 1
         if (t.state_index > #states_tree) then
             --deregister_object(t)
         else
+            cloud_particles(t.x, t.y-1, 0.5, {3,4}, 8, {7})
             t.state = states_tree[t.state_index] 
         end
     end

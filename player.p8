@@ -24,6 +24,7 @@ function create_player(x, y)
         whiteframe=0,
         flash_clr=1,
         score=0,
+        holding=nil,
     }
 
     register_object(p)
@@ -41,11 +42,12 @@ function update_player(p)
 
 
     if btnp(4) then
-        create_tree(p.x + tern(p.faceleft, -8, 8), p.y-1)
+        player_main_action(p)
     end
 
     if btnp(5) then
-        SHOW_DEBUG_OBJ = not SHOW_DEBUG_OBJ
+        create_tree(p.x + tern(p.faceleft, -8, 8), p.y-1)
+        --SHOW_DEBUG_OBJ = not SHOW_DEBUG_OBJ
     end
 
     -- move
@@ -79,9 +81,19 @@ function draw_player(p)
     line(p.x-3, p.y+3, p.x+2, p.y+3, 0)
     line(p.x-2, p.y+4, p.x+1, p.y+4, 0)
 
-    print(p.score, 2, 2, 6)
-
+    -- self
     draw_self(p)
+
+    -- draw holding
+    local h = p.holding
+    if h != nil then 
+        h.x = p.x
+        h.y = p.y - p.h - h.h/2
+        p.holding:draw(p)
+    end
+
+    -- UI
+    print(p.score, 2, 2, 6)
 end
 
 function hit_clock_player(p, c)
@@ -93,4 +105,26 @@ function hit_clock_player(p, c)
         add_shake(4)
         cloud_particles(p.x, p.y, 0.5, {3,4}, 8, {9,10})
     end
+end
+
+function player_main_action(p)
+    if p.holding != nil then
+        throw_holding(p) 
+        p.holding=nil
+    else
+        -- pick up
+        for i in group("holdable") do
+            if v_dist(p,i) < 10 then
+                p.holding = i
+                deregister_grid_object(i)
+                goto _
+            end
+        end
+
+        ::_::
+    end
+end
+
+function throw_holding(p)
+    printh(p.holding)
 end

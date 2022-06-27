@@ -64,9 +64,33 @@ function get_grid_coord(x,y)
     return flr(x/8),flr(y/8)
 end
 
+
+function table_sort(a,cmp)
+    for i=1,#a do
+        local j = i
+            while j > 1 and cmp(a[j-1],a[j]) do
+                a[j],a[j-1] = a[j-1],a[j]
+                j = j - 1
+        end
+    end
+    return a
+end
+
+function table_concat(t1, t2)
+    local tc = {}
+    for i=1,#t1 do
+        tc[i] = t1[i]
+    end
+    for i=1,#t2 do
+        tc[#t1+i] = t2[i]
+    end
+    return tc
+end
+
 function tern(cond, T, F) if cond then return T else return F end end
 function pick(ar,k) k=k or #ar return ar[flr(rnd(k))+1] end
 function lerp(var,target,pow) return var+pow*(target-var) end
 function dist(xa,ya) return sqrt(sqrdist(xa,ya)) end
 function sqrdist(x,y) return x*x+y*y end
 function frnd(a) return flr(rnd(a)) end
+function sqr(a) return a*a end

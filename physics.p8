@@ -116,7 +116,3 @@ function radius_objgroup(obj,groupname,radius)
     end
     return out
 end
-
-function apply_gravity(o)
-    o.vy += 0.4
-end

@@ -14,6 +14,7 @@ GRID_INVALIDS = {{7,7}, {7,8}, {8,7}, {8,8}}
 objs={
     player={},
     static={},
+    holdable={},
     hit_clock={},
     hit_player={},
     to_update={},
