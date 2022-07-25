@@ -40,7 +40,7 @@ end
 function draw_clock(c)
     -- draw base
     rectfill(12,12,118,118,1)
-    map(0, 0, 0, 0, 16, 16)
+    map(9, 6, 1*8, 2*-8, 16, 16+3)
 
     -- draw hand
     linefill(c.x, c.y+1, c.xe, c.ye+1, 1.6, 4)

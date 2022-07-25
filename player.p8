@@ -6,7 +6,7 @@ function create_player(x, y)
         vx=0,
         vy=0,
         acc=1.1,
-        spdcap=2,
+        spdcap=1000,
         decx=0.6,
         decy=0.6,
         w=6,
@@ -15,7 +15,7 @@ function create_player(x, y)
         faceleft=true,
         name="player",
         state="idle",
-        regs={"to_update","to_draw3", "player"},
+        regs={"to_update","to_draw3", "player", "hit_clock"},
         update=update_player,
         draw=draw_player,
         hit_clock=hit_clock_player,
@@ -25,6 +25,8 @@ function create_player(x, y)
         flash_clr=1,
         score=0,
         holding=nil,
+        dashing=false,
+        dashing_until=0,
     }
 
     register_object(p)
@@ -40,13 +42,18 @@ function update_player(p)
     if btn(2) then movy-=p.acc end
     if btn(3) then movy+=p.acc end
 
-
-    if btnp(4) then
+    if btnp(5) and can_input(p) then
         player_main_action(p)
     end
 
-    if btnp(5) then
-        create_tree(p.x + tern(p.faceleft, -8, 8), p.y-1)
+    if btnp(4) and can_input(p) then
+        movx *= 3
+        movy *= 3
+
+        make_immune(p, 0.5)
+        p.dashing = true
+        p.dashing_until = time() + 0.5
+        --create_tree(p.x + tern(p.faceleft, -8, 8), p.y-1)
         --SHOW_DEBUG_OBJ = not SHOW_DEBUG_OBJ
     end
 
@@ -55,7 +62,9 @@ function update_player(p)
 
     -- state
     local newstate
-    if abs(p.vx)>0.1 or abs(p.vy)>0.1 then
+    if p.dashing then
+        newstate = "dash"
+    elseif abs(p.vx)>0.1 or abs(p.vy)>0.1 then
         newstate = "run"
     else
         newstate = "idle"
@@ -73,6 +82,13 @@ function update_player(p)
 
     -- immunitiy
     p.immune = time() < p.immune_until
+
+    -- dashing
+    p.dashing = time() < p.dashing_until
+end
+
+function can_input(p)
+    return p.dashing == false
 end
 
 function draw_player(p)
@@ -99,18 +115,19 @@ end
 function hit_clock_player(p, c)
     if (p.immune) then 
     else
-        p.immune = true
-        p.immune_until = time() + 1
-        p.whiteframe=1*30
+        make_immune(p, 1)
         add_shake(4)
         cloud_particles(p.x, p.y, 0.5, {3,4}, 8, {9,10})
+
+        if p.holding != nil then
+            throw_holding(p)
+        end
     end
 end
 
 function player_main_action(p)
     if p.holding != nil then
-        throw_holding(p) 
-        p.holding=nil
+        throw_holding(p)
     else
         -- pick up
         for i in group("holdable") do
@@ -126,5 +143,9 @@ function player_main_action(p)
 end
 
 function throw_holding(p)
-    printh(p.holding)
+    p.holding.vx = 5*tern(p.faceleft, -1, 1)
+    --p.holding.vy = 30*-.8
+    make_airborn(p.holding, 0)
+    register_object(p.holding)
+    p.holding=nil
 end

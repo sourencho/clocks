@@ -43,6 +43,21 @@ function get_cell(x, y)
     return grid[i][j]
 end
 
+function maybe_snap_to_grid_and_register(o)
+    local c = get_cell(o.x, o.y)
+    if (is_cell_invalid(c)) then
+        draw_cors[cocreate(draw_square_cor)] = {x=c.j*8,y=c.i*8,s=7,c=8}
+        return false
+    end
+
+    o.x = c.j*8+4
+    o.y = c.i*8+4
+    o.i = c.i
+    o.j = c.j
+    register_grid_object(o,c.i,c.j)
+    return true
+end
+
 function deregister_grid_object(o)
     grid[o.i][o.j].obj = nil
     deregister_object(o)
@@ -52,6 +67,8 @@ function register_grid_object(o, i, j)
     grid[i][j].obj = o
     register_object(o)
 end
+
+
 
 
 -- todo: make this more efficient and deterministic

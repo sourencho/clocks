@@ -37,6 +37,10 @@ function init_anim_info()
                 sprites={25, 26, 27, 28, 29},
                 dt=0.015
             },
+            dash={
+                sprites={37,21,22,21},
+                dt=0.015
+            }
         },
         tree={
             sapling={

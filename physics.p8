@@ -18,7 +18,7 @@ function update_movement(s, nx, ny, bounce, collide)
         if col_st then
             s.x=ox
             if bounce then
-                s.vx*=-0.2
+                s.vx*=-0.8
             else
                 s.vx*=0.1
             end
@@ -29,7 +29,7 @@ function update_movement(s, nx, ny, bounce, collide)
         if col_st then
             s.y=oy 
             if bounce then
-                s.vy*=-0.6
+                s.vy*=-0.8
             else
                 s.vy*=0.2
             end

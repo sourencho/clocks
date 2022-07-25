@@ -26,13 +26,13 @@ function create_fruit(x, y)
         draw=draw_self,
         hit_clock=hit_clock_fruit,
         hit_player=hit_player_fruit,
-        immune=false,
-        immune_until=0,
+        airborn=false,
+        airborn_until=0,
         i=i,
         j=j
     }
 
-    make_immune(t, 1)
+    make_airborn(t, 1)
 
     register_grid_object(t, c.i, c.j)
 end
@@ -41,14 +41,14 @@ function update_fruit(t)
     update_animt(t)
 
     -- immunitiy
-    t.immune = time() < t.immune_until
+    t.airborn = time() < t.airborn_until
 end
 
 function hit_clock_fruit(o, c)
-    if (o.immune) then 
+    if (o.airborn) then 
         -- noop
     else
-        make_immune(o, 0.2)
+        make_airborn(o, 0.2)
         add_shake(0.3)
         cloud_particles(o.x, o.y-1, 0.5, {3,4}, 8, {7})
 

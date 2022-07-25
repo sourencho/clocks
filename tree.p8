@@ -3,7 +3,7 @@ states_tree = {"sapling", "bush", "tree", "tree_dry"}
 function create_tree(x, y)
     local c = get_cell(x, y)
     if (is_cell_invalid(c)) then
-        draw_cors[cocreate(draw_square_cor)] = {x=j*8,y=i*8,s=7,c=8}
+        draw_cors[cocreate(draw_square_cor)] = {x=c.j*8,y=c.i*8,s=7,c=8}
         return
     end
 
@@ -13,9 +13,9 @@ function create_tree(x, y)
         vx=0,
         vy=0,
         acc=1.1,
-        spdcap=2,
-        decx=0.6,
-        decy=0.6,
+        spdcap=20,
+        decx=0.9,
+        decy=0.9,
         w=6,
         h=6,
         animt=0,
@@ -28,13 +28,15 @@ function create_tree(x, y)
         draw=draw_self,
         hit_clock=hit_clock_tree,
         hit_rain=hit_rain_tree,
+        airborn=false,
+        airborn_until=0,
         immune=false,
         immune_until=0,
         i=i,
         j=j
     }
 
-    make_immune(t, 1)
+    make_immune(t, 0.5)
 
     register_grid_object(t, c.i, c.j)
 end
@@ -42,21 +44,33 @@ end
 function update_tree(t)
     update_animt(t)
 
-    -- immunitiy
-    t.immune = time() < t.immune_until
+    if (t.airborn) then
+        update_movement(t, 0, 0, true, true)    
+    end
+
+    update_immune(t)
+
+    if (time() > t.airborn_until and t.airborn) then
+        t.airborn = false
+        t.vx = 0
+        t.vy = 0
+        deregister_object(t)
+        maybe_snap_to_grid_and_register(t)
+        --make_immune(t, 0)
+    end
 end
 
 function hit_clock_tree(t, c)
-    if (t.immune) then 
+    if (t.immune or t.airborn) then 
         -- noop
     else
-        make_immune(t, 0.2)
+        make_immune(t, 0.5)
 
+        cloud_particles(t.x, t.y-1, 0.5, {3,4}, 8, {7})
         t.state_index += 1
         if (t.state_index > #states_tree) then
-            --deregister_object(t)
+            deregister_grid_object(t)
         else
-            cloud_particles(t.x, t.y-1, 0.5, {3,4}, 8, {7})
             t.state = states_tree[t.state_index] 
         end
     end
@@ -69,10 +83,4 @@ function hit_rain_tree(t)
         create_fruit(t.x + 8, t.y)
         cloud_particles(t.x, t.y-1, 0.5, {3,4}, 8, {12})
     end
-end
-
-function make_immune(o, dur)
-    o.immune = true
-    o.immune_until = time() + dur
-    o.whiteframe = dur * 30
 end

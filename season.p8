@@ -24,7 +24,7 @@ function create_season(x, y)
         immune_until=0,
     }
 
-    make_immune(t, 1)
+    make_immune(t, 0.5)
 
     register_grid_object(t, c.i, c.j)
 end
@@ -43,7 +43,7 @@ function hit_clock_season(o, c)
     if (o.immune) then
         -- noop
     else
-        make_immune(o, 0.2)
+        make_immune(o, 0.5)
         add_shake(1)
 
         o.state_index = o.state_index % #states_season + 1

@@ -94,3 +94,21 @@ function dist(xa,ya) return sqrt(sqrdist(xa,ya)) end
 function sqrdist(x,y) return x*x+y*y end
 function frnd(a) return flr(rnd(a)) end
 function sqr(a) return a*a end
+
+-- OBJECT UTIL
+
+function make_airborn(o, dur)
+    o.airborn = true
+    o.airborn_until = time() + dur
+    o.whiteframe = dur * 30
+end
+
+function make_immune(o, dur)
+    o.immune = true
+    o.immune_until = time() + dur
+    o.whiteframe = dur * 30
+end
+
+function update_immune(o)
+    o.immune = time() < o.immune_until
+end

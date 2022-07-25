@@ -12,6 +12,7 @@ function _update()
     update_text()
     update_shake()
     update_objects()
+    update_spawner()
 end
 
 function _draw()
@@ -32,9 +33,9 @@ function _draw()
 end
 
 function spawn_objects()
-    create_clock(64,64,44,3)
+    create_clock(64,64,44,4)
     create_player(80,80)
-    --create_season(40, 40)
+    create_season(40, 40)
     --create_season(40, 80)
 end
 
