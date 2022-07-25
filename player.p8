@@ -35,27 +35,42 @@ end
 function update_player(p)
     update_animt(p)
     local movx,movy=0,0
+    local dir = {x=0,y=0}
 
     -- input
-    if btn(0) then movx-=p.acc p.faceleft=true end
-    if btn(1) then movx+=p.acc p.faceleft=false end
-    if btn(2) then movy-=p.acc end
-    if btn(3) then movy+=p.acc end
+    if btn(0) then dir.x=-1 p.faceleft=true end
+    if btn(1) then dir.x=1 p.faceleft=false end
+    if btn(2) then dir.y=-1 end
+    if btn(3) then dir.y=1 end
 
-    if btnp(5) and can_input(p) then
-        player_main_action(p)
+    if (dir.x != 0 or dir.y != 0) then
+        dir = v_normalize(dir)
     end
 
-    if btnp(4) and can_input(p) then
-        movx *= 3
-        movy *= 3
+    if can_input(p) then
+        if btnp(5) then
+            player_main_action(p)
+        end
 
-        make_immune(p, 0.5)
-        p.dashing = true
-        p.dashing_until = time() + 0.5
-        --create_tree(p.x + tern(p.faceleft, -8, 8), p.y-1)
-        --SHOW_DEBUG_OBJ = not SHOW_DEBUG_OBJ
+        if btnp(4) then
+            if (dir.x != 0 or dir.y != 0) then
+                movx = dir.x * p.acc * 4
+                movy = dir.y * p.acc * 4
+            else
+                printh("here")
+                movx = tern(p.faceleft, -1, 1) * p.acc * 8
+            end
+
+            make_immune(p, 0.5)
+            p.dashing = true
+            p.dashing_until = time() + 0.5
+            --create_tree(p.x + tern(p.faceleft, -8, 8), p.y-1)
+            --SHOW_DEBUG_OBJ = not SHOW_DEBUG_OBJ
+        end
     end
+
+    movx += dir.x * p.acc
+    movy += dir.y * p.acc
 
     -- move
     update_movement(p,movx,movy,true,true)

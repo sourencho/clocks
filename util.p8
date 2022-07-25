@@ -112,3 +112,16 @@ end
 function update_immune(o)
     o.immune = time() < o.immune_until
 end
+
+-- VECTOR UTIL 
+
+-- Compute magnitude of v
+function v_mag( v )
+    return sqrt( ( v.x * v.x ) + ( v.y * v.y ) )
+end
+
+-- Normalizes v into a unit vector
+function v_normalize( v )
+    local len = v_mag( v )
+    return { x = v.x / len, y = v.y / len }
+end
