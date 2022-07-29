@@ -2,6 +2,7 @@ pico-8 cartridge // http://www.pico-8.com
 version 34
 __lua__
 #include config.p8
+#include mouse.p8
 #include core.p8
 #include object.p8
 #include physics.p8

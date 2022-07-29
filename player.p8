@@ -57,7 +57,6 @@ function update_player(p)
                 movx = dir.x * p.acc * 4
                 movy = dir.y * p.acc * 4
             else
-                printh("here")
                 movx = tern(p.faceleft, -1, 1) * p.acc * 8
             end
 

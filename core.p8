@@ -6,6 +6,8 @@ function _init()
     init_anim_info()
     init_grid(GRID_START_X, GRID_START_Y, GRID_WIDTH, GRID_HEIGHT)
     spawn_objects()
+
+    --mouse.init()
 end
 
 function _update()
@@ -13,6 +15,8 @@ function _update()
     update_shake()
     update_objects()
     update_spawner()
+
+    --update_mouse(mouse)
 end
 
 function _draw()
@@ -30,12 +34,14 @@ function _draw()
     end
 
     camera(xmod,ymod)
+
+    --draw_mouse(mouse)
 end
 
 function spawn_objects()
     create_clock(64,64,44,4)
     create_player(80,80)
-    create_season(40, 40)
+    create_season(64, 40)
     --create_season(40, 80)
 end
 
