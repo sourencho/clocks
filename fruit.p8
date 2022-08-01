@@ -45,7 +45,7 @@ function update_fruit(t)
 end
 
 function hit_clock_fruit(o, c)
-    if (o.airborn) then 
+    if (o.airborn) then
         -- noop
     else
         make_airborn(o, 0.2)
@@ -57,6 +57,11 @@ function hit_clock_fruit(o, c)
 end
 
 function hit_player_fruit(o, p)
+    -- can only eat as adult
+    if (get_form(p) ~= "_baby") then
+        return
+    end
+
     p.score += 1
     create_text(p.x, p.y, "+1", 7, 0)
     deregister_grid_object(o)

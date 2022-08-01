@@ -40,8 +40,8 @@ end
 
 function spawn_objects()
     create_clock(64,64,44,4)
-    create_player(80,80)
-    create_season(64, 40)
+    create_player(32,32)
+    create_season(64+8+8, 32+8)
     --create_season(40, 80)
 end
 

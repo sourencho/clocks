@@ -29,16 +29,28 @@ objs={
 function init_anim_info()
     anim_info={
         player={
-            idle={
+            idle_adult={
                 sprites={23, 24},
                 dt=0.1
             },
-            run={
+            run_adult={
                 sprites={25, 26, 27, 28, 29},
                 dt=0.015
             },
-            dash={
+            dash_adult={
                 sprites={37,21,22,21},
+                dt=0.015
+            },
+            idle_baby={
+                sprites={07, 08},
+                dt=0.1
+            },
+            run_baby={
+                sprites={09,10,11,12,13},
+                dt=0.015
+            },
+            dash_baby={
+                sprites={04,05,06,05},
                 dt=0.015
             }
         },

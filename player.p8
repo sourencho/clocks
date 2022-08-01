@@ -27,6 +27,8 @@ function create_player(x, y)
         holding=nil,
         dashing=false,
         dashing_until=0,
+        forms={"_adult", "_baby"},
+        form_index=1
     }
 
     register_object(p)
@@ -76,12 +78,13 @@ function update_player(p)
 
     -- state
     local newstate
+    local form = get_form(p)
     if p.dashing then
-        newstate = "dash"
+        newstate = "dash"..form
     elseif abs(p.vx)>0.1 or abs(p.vy)>0.1 then
-        newstate = "run"
+        newstate = "run"..form
     else
-        newstate = "idle"
+        newstate = "idle"..form
     end
 
     if newstate ~= p.state then
@@ -136,6 +139,8 @@ function hit_clock_player(p, c)
         if p.holding != nil then
             throw_holding(p)
         end
+
+        p.form_index = (p.form_index % #p.forms) + 1
     end
 end
 
@@ -143,6 +148,12 @@ function player_main_action(p)
     if p.holding != nil then
         throw_holding(p)
     else
+        -- only can pick up as an adult
+        local form = get_form(p)
+        if form ~= "_adult" then
+            goto _
+        end
+
         -- pick up
         for i in group("holdable") do
             if v_dist(p,i) < 10 then
@@ -162,4 +173,8 @@ function throw_holding(p)
     make_airborn(p.holding, 0)
     register_object(p.holding)
     p.holding=nil
+end
+
+function get_form(p)
+    return p.forms[p.form_index]
 end
