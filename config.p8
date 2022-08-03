@@ -1,5 +1,9 @@
 -- GAME
 
+-- PARAMS
+CLOCK_SPEED = 10
+
+-- DEBUG
 SHOW_DEBUG_OBJ = false
 SHOW_DEBUG_GRID = false
 

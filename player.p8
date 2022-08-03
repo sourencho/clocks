@@ -32,6 +32,8 @@ function create_player(x, y)
     }
 
     register_object(p)
+
+    return p
 end
 
 function update_player(p)

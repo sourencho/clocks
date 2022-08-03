@@ -39,17 +39,20 @@ function _draw()
 end
 
 function spawn_objects()
-    create_clock(64,64,44,4)
-    create_player(32,32)
+    create_clock(64,64,44,CLOCK_SPEED)
+    player = create_player(32,32)
     create_season(64+8+8, 32+8)
     --create_season(40, 80)
 end
 
 function draw_background()
+    b1_clr = tern(get_form(player) == "_baby", 2, 1)
+    b2_clr = tern(get_form(player) == "_baby", 1, 0)
+
     -- Pattern made using https://seansleblanc.itch.io/pico-8-fillp-tool
-    rectfill(-20,-20,148,148,1)
+    rectfill(-20,-20,148,148,b1_clr)
     fillp(0B1000010100100000.1)
-    rectfill(-20,-20,148,148,0)
+    rectfill(-20,-20,148,148,b2_clr)
     fillp()
 end
 
