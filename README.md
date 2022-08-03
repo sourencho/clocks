@@ -1,3 +1,3 @@
 # clocks
 
-![](screenshots/clock_mock.gif)
+![](screenshots/clock_demo_1.gif)
