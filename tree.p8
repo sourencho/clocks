@@ -1,4 +1,4 @@
-states_tree = {"sapling", "bush", "tree", "tree_dry"}
+states_tree = {"sapling", "tree", "tree_dry"}
 
 function create_tree(x, y)
     local c = get_cell(x, y)
@@ -36,7 +36,7 @@ function create_tree(x, y)
         j=j
     }
 
-    make_immune(t, 0.5)
+    make_immune(t, OBJ_IMMUNE_DUR)
 
     register_grid_object(t, c.i, c.j)
 end
@@ -64,7 +64,7 @@ function hit_clock_tree(t, c)
     if (t.immune or t.airborn) then 
         -- noop
     else
-        make_immune(t, 0.5)
+        make_immune(t, OBJ_IMMUNE_DUR)
 
         cloud_particles(t.x, t.y-1, 0.5, {3,4}, 8, {7})
         t.state_index += 1

@@ -116,16 +116,25 @@ function draw_player(p)
     line(p.x-3, p.y+3, p.x+2, p.y+3, 0)
     line(p.x-2, p.y+4, p.x+1, p.y+4, 0)
 
-    -- self
-    draw_self(p)
-
     -- draw holding
     local h = p.holding
     if h != nil then 
         h.x = p.x
         h.y = p.y - p.h - h.h/2
         p.holding:draw(p)
+    else
+        -- draw target
+        for i in group("holdable") do
+            if v_dist(p,i) < 10 then
+                spr(tern(can_hold(p), 3, 19), i.x-4, i.y-5)
+                goto __
+            end
+        end
+        ::__::
     end
+
+    -- self
+    draw_self(p)
 
     -- UI
     print(p.score, 2, 2, 6)
@@ -150,18 +159,14 @@ function player_main_action(p)
     if p.holding != nil then
         throw_holding(p)
     else
-        -- only can pick up as an adult
-        local form = get_form(p)
-        if form ~= "_adult" then
-            goto _
-        end
-
         -- pick up
-        for i in group("holdable") do
-            if v_dist(p,i) < 10 then
-                p.holding = i
-                deregister_grid_object(i)
-                goto _
+        if (can_hold(p)) then
+            for i in group("holdable") do
+                if v_dist(p,i) < 10 then
+                    p.holding = i
+                    deregister_grid_object(i)
+                    goto _
+                end
             end
         end
 
@@ -179,4 +184,8 @@ end
 
 function get_form(p)
     return p.forms[p.form_index]
+end
+
+function can_hold(p)
+    return get_form(p) == "_adult"
 end
