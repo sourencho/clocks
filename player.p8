@@ -122,11 +122,16 @@ function draw_player(p)
         h.x = p.x
         h.y = p.y - p.h - h.h/2
         p.holding:draw(p)
+
+        -- draw target
+        local c = target_cell(p)
+        draw_target(c.x-4, c.y-5, tern(not is_cell_invalid(c), 7, 8))
+
     else
         -- draw target
         for i in group("holdable") do
             if v_dist(p,i) < 10 then
-                spr(tern(can_hold(p), 3, 19), i.x-4, i.y-5)
+                draw_target(i.x-4, i.y-5, tern(can_hold(p), 7, 8))
                 goto __
             end
         end
@@ -148,7 +153,7 @@ function hit_clock_player(p, c)
         cloud_particles(p.x, p.y, 0.5, {3,4}, 8, {9,10})
 
         if p.holding != nil then
-            throw_holding(p)
+            p.holding = nil
         end
 
         p.form_index = (p.form_index % #p.forms) + 1
@@ -157,7 +162,7 @@ end
 
 function player_main_action(p)
     if p.holding != nil then
-        throw_holding(p)
+        place_holding(p)
     else
         -- pick up
         if (can_hold(p)) then
@@ -174,12 +179,16 @@ function player_main_action(p)
     end
 end
 
-function throw_holding(p)
-    p.holding.vx = 5*tern(p.faceleft, -1, 1)
-    --p.holding.vy = 30*-.8
-    make_airborn(p.holding, 0)
-    register_object(p.holding)
-    p.holding=nil
+function place_holding(p)
+    local c = target_cell(p)
+    if not is_cell_invalid(c) then
+        register_object_at_cell(p.holding, c)
+        p.holding=nil
+    end
+end
+
+function target_cell(p)
+    return get_cell(p.x + tern(p.faceleft, -6, 6), p.y)
 end
 
 function get_form(p)

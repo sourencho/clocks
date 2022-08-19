@@ -97,6 +97,12 @@ function draw_self(s)
     draw_debug_coll(s)
 end
 
+function draw_target(x, y, clr)
+    pal(7,clr)
+    spr(3, x, y)
+    pal()
+end
+
 function add_shake(p)
     local a=rnd(1)
     shkx+=p*cos(a)

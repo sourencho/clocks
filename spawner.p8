@@ -1,5 +1,5 @@
 spawner = {
-    spawntime = 4,
+    spawntime = 1000,
 }
 
 function update_spawner()

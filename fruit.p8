@@ -45,7 +45,7 @@ function update_fruit(t)
 end
 
 function hit_clock_fruit(o, c)
-    if (o.airborn) then
+    if (o.immune) then
         -- noop
     else
         make_immune(o, OBJ_IMMUNE_DUR)

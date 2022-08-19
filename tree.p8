@@ -28,8 +28,6 @@ function create_tree(x, y)
         draw=draw_self,
         hit_clock=hit_clock_tree,
         hit_rain=hit_rain_tree,
-        airborn=false,
-        airborn_until=0,
         immune=false,
         immune_until=0,
         i=i,
@@ -43,25 +41,11 @@ end
 
 function update_tree(t)
     update_animt(t)
-
-    if (t.airborn) then
-        update_movement(t, 0, 0, true, true)    
-    end
-
     update_immune(t)
-
-    if (time() > t.airborn_until and t.airborn) then
-        t.airborn = false
-        t.vx = 0
-        t.vy = 0
-        deregister_object(t)
-        maybe_snap_to_grid_and_register(t)
-        --make_immune(t, 0)
-    end
 end
 
 function hit_clock_tree(t, c)
-    if (t.immune or t.airborn) then 
+    if t.immune then 
         -- noop
     else
         make_immune(t, OBJ_IMMUNE_DUR)

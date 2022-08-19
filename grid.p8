@@ -58,6 +58,14 @@ function maybe_snap_to_grid_and_register(o)
     return true
 end
 
+function register_object_at_cell(o, c)
+    o.x = c.j*8+4
+    o.y = c.i*8+4
+    o.i = c.i
+    o.j = c.j
+    register_grid_object(o, c.i, c.j)
+end
+
 function deregister_grid_object(o)
     grid[o.i][o.j].obj = nil
     deregister_object(o)

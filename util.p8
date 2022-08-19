@@ -97,12 +97,6 @@ function sqr(a) return a*a end
 
 -- OBJECT UTIL
 
-function make_airborn(o, dur)
-    o.airborn = true
-    o.airborn_until = time() + dur
-    o.whiteframe = dur * 30
-end
-
 function make_immune(o, dur)
     o.immune = true
     o.immune_until = time() + dur
