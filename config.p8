@@ -1,8 +1,8 @@
 -- GAME
 
 -- PARAMS
-CLOCK_SPEED = 10
-OBJ_IMMUNE_DUR = 2
+CLOCK_SPEED = 20
+OBJ_IMMUNE_DUR = 3
 
 -- DEBUG
 SHOW_DEBUG_OBJ = false
@@ -82,10 +82,18 @@ function init_anim_info()
             }
         },
         fruit={
-            idle={
+            plum={
                 sprites={57},
                 dt=0.1
-            }
+            },
+            cherry={
+                sprites={53},
+                dt=0.1
+            },
+            orange={
+                sprites={62},
+                dt=0.1
+            },
         },
         season={
             summer={

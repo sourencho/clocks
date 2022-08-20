@@ -1,11 +1,14 @@
+SPAWN_RATE = 5
+
 spawner = {
-    spawntime = 1000,
+    spawntime = 0,
 }
 
 function update_spawner()
     if (spawner.spawntime < time()) then
-        local c = get_rnd_valid_grid_cell()
+        --local c = get_rnd_valid_grid_cell()
+        local c = grid[13][2]
         create_tree(c.x, c.y) 
-        spawner.spawntime += 5 + rnd(1)
+        spawner.spawntime += SPAWN_RATE
     end
 end

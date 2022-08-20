@@ -32,6 +32,13 @@ function draw_grid_debug()
             circ(e.x, e.y, 2, e.valid and c or 8)
         end
     end
+
+    for x=0,15 do
+        local e = grid[x][0]
+        print(x, e.x-2, e.y-2, 11)
+        local e = grid[0][x]
+        print(x, e.x-2, e.y-2, 11)
+    end
 end
 
 function is_cell_invalid(c)
@@ -76,8 +83,18 @@ function register_grid_object(o, i, j)
     register_object(o)
 end
 
-
-
+function get_cells_around(o, r)
+    local cs = {}
+    for i=0,15 do
+        for j=0,15 do
+            local c = grid[i][j]
+            if v_dist_sqr(c, o) <= r*r then
+                add(cs, c)
+            end
+        end
+    end
+    return cs;
+end
 
 -- todo: make this more efficient and deterministic
 function get_rnd_valid_grid_cell()

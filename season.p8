@@ -22,6 +22,7 @@ function create_season(x, y)
         hit_clock=hit_clock_season,
         immune=false,
         immune_until=0,
+        rained = false,
     }
 
     make_immune(t, OBJ_IMMUNE_DUR)
@@ -29,14 +30,16 @@ function create_season(x, y)
     register_grid_object(t, c.i, c.j)
 end
 
-function update_season(t)
-    if (t.state == "cloud") then
-        local c = get_rnd_valid_grid_cell()
-        draw_cors[cocreate(draw_grid_rain_cor)] = c
+function update_season(o)
+    if (o.state == "cloud" and not o.rained) then
+        for c in all(get_cells_around(o, 20)) do
+            draw_cors[cocreate(draw_grid_rain_cor)] = c
+        end
+        o.rained = true
     end
 
     -- immunitiy
-    t.immune = time() < t.immune_until
+    o.immune = time() < o.immune_until
 end
 
 function hit_clock_season(o, c)
@@ -47,6 +50,7 @@ function hit_clock_season(o, c)
         add_shake(1)
 
         o.state_index = o.state_index % #states_season + 1
-        o.state = states_season[o.state_index] 
+        o.state = states_season[o.state_index]
+        o.rained = false
     end
 end
