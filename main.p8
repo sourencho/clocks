@@ -3,7 +3,6 @@ function _init()
     drk=parse"0=0,0,1,1,2,1,5,13,2,4,9,3,1,1,2,4"
     shkx, shky, camx, camy, xmod, ymod = 0,0,0,0,0,0
     floatxts={}
-    init_anim_info()
     init_grid(GRID_START_X, GRID_START_Y, GRID_WIDTH, GRID_HEIGHT)
     spawn_objects()
 
@@ -41,7 +40,8 @@ end
 function spawn_objects()
     create_clock(64,64,44,CLOCK_SPEED)
     player = create_player(32,32)
-    create_season(64+8+8, 32+8)
+    spawn_map_sprites()
+    --create_season(64+8+8, 32+8)
     --create_tree(64-16,32+16)
     --create_season(40, 80)
 end

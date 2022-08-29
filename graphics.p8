@@ -72,6 +72,9 @@ function anim_step(o)
     return v,(o.animt%info.dt<0.01)
 end
 
+function update_animation_obj(o)
+    update_animt(o)
+end
 
 function draw_self(s)
     -- sprite
