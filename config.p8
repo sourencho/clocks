@@ -20,6 +20,7 @@ objs={
     player={},
     static={},
     holdable={},
+    hit_portal={},
     hit_clock={},
     hit_player={},
     to_update={},
@@ -42,7 +43,7 @@ anim_info={
             dt=0.015
         },
         dash_adult={
-            sprites={37,21,22,21},
+            sprites={21,22,21},
             dt=0.015
         },
         idle_baby={

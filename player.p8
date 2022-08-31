@@ -14,7 +14,7 @@ function create_player(x, y)
         animt=0,
         faceleft=true,
         name="player",
-        state="idle",
+        state="idle_adult",
         regs={"to_update","to_draw3", "player", "hit_clock"},
         update=update_player,
         draw=draw_player,

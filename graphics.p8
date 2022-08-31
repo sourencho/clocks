@@ -79,7 +79,7 @@ end
 function draw_self(s)
     -- sprite
     local foo=function(s)
-               local state=s.state or "only"
+               local state=s.state or "idle"
                local z=s.z or 0
                draw_anim(s.x, s.y-1, s.name, state, s.animt, s.faceleft)
               end
@@ -119,4 +119,17 @@ function update_shake()
         shkx*=-0.5-rnd(0.2)
         shky*=-0.5-rnd(0.2)
     end
+end
+
+function hcenter(s)
+  return 64-#s*2
+end
+
+function vcenter(s)
+  return 61
+end
+
+function thick_print(s, x, y, c1, c2)
+    print(s, x, y+1, c2)
+    print(s, x, y, c1)
 end

@@ -23,7 +23,7 @@ function create_tree(x, y)
         name="tree",
         state=states_tree[1],
         state_index = 1,
-        regs={"to_update","to_draw2", "hit_clock", "holdable"},
+        regs={"to_update","to_draw2", "hit_clock", "holdable", "hit_portal"},
         update=update_tree,
         draw=draw_self,
         hit_clock=hit_clock_tree,

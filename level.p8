@@ -31,3 +31,12 @@ function get_tile(x,y,l)
     j = y + flr(level_size * l / 128)*level_size
     return mget(i,j)
 end
+
+function draw_load_level_cor(l)
+    local text = "level "..l
+    for i=0,30 do
+        print(text, hcenter(text), vcenter(text), 10)
+        yield()
+    end
+    game_state = "gameplay"
+end

@@ -1,5 +1,6 @@
 function _init()
     cls()
+    game_state = "change_level"
     drk=parse"0=0,0,1,1,2,1,5,13,2,4,9,3,1,1,2,4"
     shkx, shky, camx, camy, xmod, ymod = 0,0,0,0,0,0
     floatxts={}
@@ -10,6 +11,17 @@ function _init()
 end
 
 function _update()
+
+    if game_state == "change_level" then
+        game_state = "load_level"
+        draw_cors[cocreate(draw_load_level_cor)] = curr_level
+        return
+    end
+
+    if game_state == "load_level" then
+        return
+    end
+
     update_text()
     update_shake()
     update_objects()
@@ -24,8 +36,13 @@ function _draw()
     cls()
 
     draw_background()
-    draw_objects()
     update_cors(draw_cors)
+
+    if (game_state != "gameplay") then
+        return
+    end
+
+    draw_objects()
     draw_texts()
 
     if SHOW_DEBUG_GRID then
@@ -39,7 +56,7 @@ end
 
 function spawn_objects()
     create_clock(64,64,44,CLOCK_SPEED)
-    player = create_player(32,32)
+    player = create_player(24,24)
     spawn_map_sprites()
     --create_season(64+8+8, 32+8)
     --create_tree(64-16,32+16)
