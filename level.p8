@@ -1,4 +1,4 @@
-curr_level = 1
+curr_level = 2
 level_size = 16
 
 -- ACTORS

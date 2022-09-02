@@ -1,5 +1,3 @@
-draw_cors = {}
-
 function update_cors(cors)
     for cor, obj in pairs(cors) do
         _,exc = coresume(cor, obj)

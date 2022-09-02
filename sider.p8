@@ -4,7 +4,7 @@ function create_sider(x, y)
 
     local c = get_cell(x, y)
     if (is_cell_invalid(c)) then
-        draw_cors[cocreate(draw_square_cor)] = {x=j*8,y=i*8,s=7,c=8}
+        draw_over_obj_cors[cocreate(draw_square_cor)] = {x=j*8,y=i*8,s=7,c=8}
         return
     end
 

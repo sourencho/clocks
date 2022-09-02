@@ -4,6 +4,8 @@ function _init()
     drk=parse"0=0,0,1,1,2,1,5,13,2,4,9,3,1,1,2,4"
     shkx, shky, camx, camy, xmod, ymod = 0,0,0,0,0,0
     floatxts={}
+    draw_under_obj_cors = {}
+    draw_over_obj_cors = {}
     init_grid(GRID_START_X, GRID_START_Y, GRID_WIDTH, GRID_HEIGHT)
     spawn_objects()
 
@@ -14,7 +16,7 @@ function _update()
 
     if game_state == "change_level" then
         game_state = "load_level"
-        draw_cors[cocreate(draw_load_level_cor)] = curr_level
+        draw_under_obj_cors[cocreate(draw_load_level_cor)] = curr_level
         return
     end
 
@@ -36,13 +38,14 @@ function _draw()
     cls()
 
     draw_background()
-    update_cors(draw_cors)
+    update_cors(draw_under_obj_cors)
 
     if (game_state != "gameplay") then
         return
     end
 
     draw_objects()
+    update_cors(draw_over_obj_cors)
     draw_texts()
 
     if SHOW_DEBUG_GRID then

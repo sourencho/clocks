@@ -53,7 +53,7 @@ end
 function maybe_snap_to_grid_and_register(o)
     local c = get_cell(o.x, o.y)
     if (is_cell_invalid(c)) then
-        draw_cors[cocreate(draw_square_cor)] = {x=c.j*8,y=c.i*8,s=7,c=8}
+        draw_over_obj_cors[cocreate(draw_square_cor)] = {x=c.j*8,y=c.i*8,s=7,c=8}
         return false
     end
 

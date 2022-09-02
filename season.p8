@@ -3,7 +3,7 @@ states_season = {"summer", "cloud"}
 function create_season(x, y)
     local c = get_cell(x, y)
     if (is_cell_invalid(c)) then
-        draw_cors[cocreate(draw_square_cor)] = {x=j*8,y=i*8,s=7,c=8}
+        draw_over_obj_cors[cocreate(draw_square_cor)] = {x=j*8,y=i*8,s=7,c=8}
         return
     end
 
@@ -33,7 +33,7 @@ end
 function update_season(o)
     if (o.state == "cloud" and not o.rained) then
         for c in all(get_cells_around(o, 20)) do
-            draw_cors[cocreate(draw_grid_rain_cor)] = c
+            draw_over_obj_cors[cocreate(draw_grid_rain_cor)] = c
         end
         o.rained = true
     end
