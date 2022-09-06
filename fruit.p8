@@ -1,5 +1,4 @@
-function create_fruit(x, y)
-
+function create_fruit(x, y, type)
     local c = get_cell(x, y)
     if (is_cell_invalid(c)) then
         draw_over_obj_cors[cocreate(draw_square_cor)] = {x=j*8,y=i*8,s=7,c=8}
@@ -20,8 +19,8 @@ function create_fruit(x, y)
         animt=0,
         faceleft=true,
         name="fruit",
-        state=pick({"plum", "cherry", "orange"}),
-        regs={"to_update","to_draw2", "hit_clock", "holdable", "eatable"},
+        state=type,
+        regs={"to_update","to_draw2", "hit_clock", "holdable", "hit_portal"},
         update=update_fruit,
         draw=draw_self,
         hit_clock=hit_clock_fruit,

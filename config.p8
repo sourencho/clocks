@@ -18,7 +18,7 @@ GRID_INVALIDS = {{7,7}, {7,8}, {8,7}, {8,8}}
 -- OBJECT
 objs={
     player={},
-    static={},
+    collides={},
     holdable={},
     hit_portal={},
     hit_clock={},
@@ -60,10 +60,6 @@ anim_info={
         }
     },
     tree={
-        sapling={
-            sprites={39},
-            dt=0.1
-        },
         bush={
             sprites={40},
             dt=0.1
@@ -131,6 +127,18 @@ anim_info={
         side41={
             sprites={35},
             dt=0.1,
+        }
+    },
+    bee={
+        idle={
+            sprites={115,116},
+            dt=0.1
+        }
+    },
+    beehive={
+        idle={
+            sprites={120},
+            dt=0.1
         }
     }
 }

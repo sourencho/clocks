@@ -29,11 +29,28 @@ end
 function draw_portal(p)
     draw_self(p)
 
-    -- submitted
-    local i = 1
-    for s in all(p.submitted) do
-        draw_anim(4,8+i*8,s.name,s.state,0)
-        i += 1
+    -- goal
+    local j = 1
+    local won = true
+    for g in all(level_goal[curr_level]) do
+        
+        local count = 0
+        for s in all(p.submitted) do
+            if (s.name == g[1] and s.state == g[2]) count += 1
+        end
+
+        spr(anim_info[g[1]][g[2]].sprites[1], 0, 8+j*10)
+        print(count, 2, 19+j*10, 6)
+        print(g[3], 2, 27+j*10, 5)
+
+        won = won and count >= g[3]
+
+        j += 3
+    end
+
+    if (won) then
+        curr_level += 1
+        game_state = "change_level"
     end
 end
 

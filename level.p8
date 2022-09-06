@@ -1,11 +1,19 @@
-curr_level = 2
+curr_level = 3
 level_size = 16
+
+level_goal = {
+    [1] = {{"tree", "tree", 1}},
+    [2] = {{"fruit", "orange", 1}},
+    [3] = {{"fruit", "orange", 1}},
+}
 
 -- ACTORS
 level_actor_creator = {
     [55]=create_season,
-    [39]=create_tree,
-    [36]=create_portal
+    [40]=create_tree,
+    [36]=create_portal,
+    [120]=create_beehive,
+    [115]=create_bee,
 }
 
 function spawn_map_sprites()
@@ -35,7 +43,7 @@ end
 function draw_load_level_cor(l)
     local text = "level "..l
     for i=0,30 do
-        print(text, hcenter(text), vcenter(text), 10)
+        print(text, hcenter(text), vcenter(text)-2, 10)
         yield()
     end
     game_state = "gameplay"

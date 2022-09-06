@@ -14,7 +14,7 @@ function update_movement(s, nx, ny, bounce, collide)
         local ox,oy=s.x,s.y
       
         s.x+=s.vx
-        local col_st=collide_objgroup(s,"static")
+        local col_st=collide_objgroup(s,"collides")
         if col_st then
             s.x=ox
             if bounce then
@@ -25,7 +25,7 @@ function update_movement(s, nx, ny, bounce, collide)
         end 
         
         s.y+=s.vy
-        local col_st=collide_objgroup(s,"static")
+        local col_st=collide_objgroup(s,"collides")
         if col_st then
             s.y=oy 
             if bounce then

@@ -109,6 +109,11 @@ end
 
 -- VECTOR UTIL 
 
+-- Subtract v2 from v1
+function v_subv( v1, v2 )
+    return { x = v1.x - v2.x, y = v1.y - v2.y }
+end
+
 -- Compute magnitude of v
 function v_mag( v )
     return sqrt( ( v.x * v.x ) + ( v.y * v.y ) )

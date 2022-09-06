@@ -1,4 +1,4 @@
-states_tree = {"sapling", "tree", "tree_dry"}
+states_tree = {"bush", "tree", "tree_dry"}
 
 function create_tree(x, y)
     local c = get_cell(x, y)
@@ -10,12 +10,6 @@ function create_tree(x, y)
     local t = {
         x=c.x,
         y=c.y,
-        vx=0,
-        vy=0,
-        acc=1.1,
-        spdcap=20,
-        decx=0.9,
-        decy=0.9,
         w=6,
         h=6,
         animt=0,
@@ -63,8 +57,8 @@ end
 function hit_rain_tree(t)
     if t.state == "tree" then
         t.state = "tree_fruit"
-        create_fruit(t.x - 8, t.y)
-        create_fruit(t.x + 8, t.y)
+        create_fruit(t.x - 8, t.y, "orange")
+        create_fruit(t.x + 8, t.y, "orange")
         cloud_particles(t.x, t.y-1, 0.5, {3,4}, 8, {12})
     end
 end

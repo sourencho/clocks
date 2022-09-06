@@ -15,7 +15,7 @@ function create_player(x, y)
         faceleft=true,
         name="player",
         state="idle_adult",
-        regs={"to_update","to_draw3", "player", "hit_clock"},
+        regs={"to_update","to_draw3", "player", "hit_clock", "collides"},
         update=update_player,
         draw=draw_player,
         hit_clock=hit_clock_player,
@@ -142,7 +142,7 @@ function draw_player(p)
     draw_self(p)
 
     -- UI
-    print(p.score, 2, 2, 6)
+    --print(p.score, 2, 2, 6)
 end
 
 function hit_clock_player(p, c)

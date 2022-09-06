@@ -6,9 +6,6 @@ function _init()
     floatxts={}
     draw_under_obj_cors = {}
     draw_over_obj_cors = {}
-    init_grid(GRID_START_X, GRID_START_Y, GRID_WIDTH, GRID_HEIGHT)
-    spawn_objects()
-
     --mouse.init()
 end
 
@@ -17,6 +14,8 @@ function _update()
     if game_state == "change_level" then
         game_state = "load_level"
         draw_under_obj_cors[cocreate(draw_load_level_cor)] = curr_level
+        clear_objects()
+        spawn_objects()
         return
     end
 
@@ -29,6 +28,8 @@ function _update()
     update_objects()
     update_spawner()
 
+    menuitem(1, "restart level", function() game_state = "change_level" end)
+    menuitem(2, "skip level", function() curr_level += 1; game_state = "change_level"end)
     --update_mouse(mouse)
 end
 
@@ -58,12 +59,21 @@ function _draw()
 end
 
 function spawn_objects()
-    create_clock(64,64,44,CLOCK_SPEED)
     player = create_player(24,24)
+    create_clock(64,64,44,CLOCK_SPEED)
+    init_grid(GRID_START_X, GRID_START_Y, GRID_WIDTH, GRID_HEIGHT)
     spawn_map_sprites()
     --create_season(64+8+8, 32+8)
     --create_tree(64-16,32+16)
     --create_season(40, 80)
+end
+
+function clear_objects()
+    for key, reg in pairs(objs) do
+        for obj in all(reg) do
+            deregister_object(obj)
+        end
+    end
 end
 
 function draw_background()
