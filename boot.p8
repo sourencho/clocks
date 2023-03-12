@@ -9,7 +9,6 @@ __lua__
 #include physics.p8
 #include graphics.p8
 #include grid.p8
-#include spawner.p8
 #include player.p8
 #include static.p8
 #include particle.p8
@@ -25,6 +24,8 @@ __lua__
 #include portal.p8
 #include bee.p8
 #include beehive.p8
+#include flower.p8
+#include spawner.p8
 #include level.p8
 __gfx__
 00000000000000000000000077000077000000000000000000088000000880000000000000088000000880000000000000000000000000000000000000000000

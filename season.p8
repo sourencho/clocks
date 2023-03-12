@@ -16,13 +16,15 @@ function create_season(x, y)
         animt=0,
         state=states_season[1],
         state_index = 1,
-        regs={"to_update","to_draw2", "hit_clock"},
+        regs={"to_update","to_draw2","holdable", "hit_clock"},
         update=update_season,
         draw=draw_self,
         hit_clock=hit_clock_season,
         immune=false,
         immune_until=0,
         rained = false,
+        i=i,
+        j=j
     }
 
     make_immune(t, OBJ_IMMUNE_DUR)
