@@ -1,4 +1,4 @@
-curr_level = 3
+curr_level = 1
 level_size = 16
 
 level_goal = {
@@ -14,6 +14,7 @@ level_actor_creator = {
     [36]=create_portal,
     [120]=create_beehive,
     [115]=create_bee,
+    [39]=create_flower,
 }
 
 function spawn_map_sprites()

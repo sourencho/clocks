@@ -140,5 +140,15 @@ anim_info={
             sprites={120},
             dt=0.1
         }
+    },
+    flower={
+        sprout={
+            sprites={39},
+            dt=0.1
+        },
+        bloom={
+            sprites={118},
+            dt=0.1
+        }
     }
 }
