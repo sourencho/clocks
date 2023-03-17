@@ -20,7 +20,7 @@ function create_fruit(x, y, type)
         faceleft=true,
         name="fruit",
         state=type,
-        regs={"to_update","to_draw2", "hit_clock", "holdable", "hit_portal"},
+        regs={"to_update","to_draw2", "hit_clock", "holdable"},
         update=update_fruit,
         draw=draw_self,
         hit_clock=hit_clock_fruit,

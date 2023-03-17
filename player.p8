@@ -125,12 +125,14 @@ function draw_player(p)
 
         -- draw target
         local c = target_cell(p)
-        draw_target(c.x-4, c.y-5, tern(not is_cell_invalid(c), 7, 8))
+        draw_target(c.x-4, c.y-5, tern(is_cell_invalid(c), 8, 7))
 
     else
         -- draw target
+        -- todo: register target somewhere
+        -- todo: sort to target closest and more in front
         for i in group("holdable") do
-            if v_dist(p,i) < 10 then
+            if is_within_range(p,i) then
                 draw_target(i.x-4, i.y-5, tern(can_hold(p), 7, 8))
                 goto __
             end
@@ -142,7 +144,7 @@ function draw_player(p)
     draw_self(p)
 
     -- UI
-    --print(p.score, 2, 2, 6)
+    print(p.score, 2, 2, 6)
 end
 
 function hit_clock_player(p, c)
@@ -166,10 +168,10 @@ function player_main_action(p)
     else
         -- pick up
         if (can_hold(p)) then
-            for i in group("holdable") do
-                if v_dist(p,i) < 10 then
-                    p.holding = i
-                    deregister_grid_object(i)
+            -- todo: use registered target instead ^ see todo above
+            for o in group("holdable") do
+                if is_within_range(p,o) then
+                    pick_up(p,o)
                     goto _
                 end
             end
@@ -177,14 +179,24 @@ function player_main_action(p)
 
         ::_::
     end
-end
+end 
 
 function place_holding(p)
     local c = target_cell(p)
     if not is_cell_invalid(c) then
-        register_object_at_cell(p.holding, c)
-        p.holding=nil
+        holding_o = p.holding
+        if c.obj != nil and not c.obj.submittable then
+            pick_up(p, c.obj)
+        else
+            p.holding = nil
+        end
+        register_object_at_cell(holding_o, c)
     end
+end
+
+function pick_up(p, o)
+    p.holding = o
+    deregister_grid_object(o)
 end
 
 function target_cell(p)
@@ -197,4 +209,8 @@ end
 
 function can_hold(p)
     return get_form(p) == "_adult"
+end
+
+function is_within_range(p,o)
+   return v_dist({x=p.x+tern(p.faceleft, -3, 3), y=p.y},o) < 10
 end

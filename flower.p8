@@ -17,7 +17,7 @@ function create_flower(x, y)
         state=states_flower[1],
         state_index = 1,
         regs={"to_update","to_draw2",
-              "hit_clock", "holdable", "hit_portal"},
+              "hit_clock", "holdable"},
         update=update_flower,
         draw=draw_self,
         hit_clock=hit_clock_flower,

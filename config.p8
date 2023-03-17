@@ -20,7 +20,6 @@ objs={
     player={},
     collides={},
     holdable={},
-    hit_portal={},
     hit_clock={},
     hit_player={},
     to_update={},

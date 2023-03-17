@@ -6,8 +6,8 @@ function create_portal(x, y)
     end
 
     local t = {
-        x=x,
-        y=y,
+        x=c.x,
+        y=c.y,
         vx=0,
         vy=0,
         w=4,
@@ -20,7 +20,7 @@ function create_portal(x, y)
         update=update_portal,
         i=i,
         j=j,
-        no_grid_block=true,
+        submittable=true,
         submitted={},
     }
     register_grid_object(t, c.i, c.j)
@@ -61,7 +61,7 @@ function update_portal(p)
     update_animt(p)
 
     -- collision
-    local hits=all_collide_objgroup(p,"hit_portal",collide_objobj) 
+    local hits=all_collide_objgroup(p,"holdable",collide_objobj) 
     for h in all(hits) do
         submit_object(p,h)
     end

@@ -42,7 +42,7 @@ function draw_grid_debug()
 end
 
 function is_cell_invalid(c)
-    return not (c.valid == true and (c.obj == nil or (c.obj ~= nil and c.obj.no_grid_block == true)))
+    return not c.valid
 end
 
 function get_cell(x, y)
