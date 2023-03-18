@@ -22,6 +22,7 @@ function create_portal(x, y)
         j=j,
         submittable=true,
         submitted={},
+        score=0
     }
     register_grid_object(t, c.i, c.j)
 end
@@ -29,7 +30,7 @@ end
 function draw_portal(p)
     draw_self(p)
 
-    local won = false
+    -- local won = false
 
     -- goal
 
@@ -51,10 +52,13 @@ function draw_portal(p)
     --     j += 3
     -- end
 
-    if (won) then
-        curr_level += 1
-        game_state = "change_level"
-    end
+    -- if (won) then
+    --     curr_level += 1
+    --     game_state = "change_level"
+    -- end
+
+    -- UI
+    print(p.score, 2, 2, 6)
 end
 
 function update_portal(p)
@@ -71,4 +75,11 @@ function submit_object(p,o)
     local s = o
     add(p.submitted, s)
     deregister_grid_object(o)
+
+    -- score
+    s = o.name.."_"..o.state
+    value = points[s] or 0
+    p.score += value
+
+    create_text(o.x,o.y,value,0,7)
 end

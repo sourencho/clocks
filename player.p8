@@ -142,9 +142,6 @@ function draw_player(p)
 
     -- self
     draw_self(p)
-
-    -- UI
-    print(p.score, 2, 2, 6)
 end
 
 function hit_clock_player(p, c)

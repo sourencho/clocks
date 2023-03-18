@@ -15,6 +15,14 @@ GRID_WIDTH = 12
 GRID_HEIGHT = 12
 GRID_INVALIDS = {{7,7}, {7,8}, {8,7}, {8,8}}
 
+-- POINTS
+points={
+    tree_bush=0,
+    tree_tree=1,
+    tree_tree_dry=0,
+    flower_bloom=1,
+}
+
 -- OBJECT
 objs={
     player={},
