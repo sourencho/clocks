@@ -81,5 +81,5 @@ function submit_object(p,o)
     value = points[s] or 0
     p.score += value
 
-    create_text(o.x,o.y,value,0,7)
+    create_text(o.x,o.y,"+"..value,7,0)
 end

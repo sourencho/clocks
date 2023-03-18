@@ -32,9 +32,9 @@ function draw_text(str,x,y,al,c1,c2)
     
     y-=3
     
-    --print(str,x+1,y+1,c2)
-    --print(str,x-1,y+1,c2)
-    --print(str,x,y+2,c2)
+    print(str,x+1,y+1,c2)
+    print(str,x-1,y+1,c2)
+    print(str,x,y+2,c2)
     print(str,x+1,y,c2)
     print(str,x-1,y,c2)
     print(str,x,y+1,c2)

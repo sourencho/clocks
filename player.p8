@@ -23,7 +23,6 @@ function create_player(x, y)
         immune_until=0,
         whiteframe=0,
         flash_clr=1,
-        score=0,
         holding=nil,
         dashing=false,
         dashing_until=0,
@@ -122,22 +121,20 @@ function draw_player(p)
         h.x = p.x
         h.y = p.y - p.h - h.h/2
         p.holding:draw(p)
+    end
 
-        -- draw target
-        local c = target_cell(p)
-        draw_target(c.x-4, c.y-5, tern(is_cell_invalid(c), 8, 7))
+    local c = target_cell(p)
 
-    else
-        -- draw target
-        -- todo: register target somewhere
-        -- todo: sort to target closest and more in front
-        for i in group("holdable") do
-            if is_within_range(p,i) then
-                draw_target(i.x-4, i.y-5, tern(can_hold(p), 7, 8))
-                goto __
-            end
+    if is_cell_invalid(c) or not can_hold(p) then
+        draw_target(c.x-4, c.y-5, 8)
+    elseif c.obj != nil then
+        if contains(c.obj.regs, "holdable") then
+            draw_target(c.x-4, c.y-5, tern(h == nil, 7, 12))
+        elseif c.obj.name == "portal"  then
+            draw_target(c.x-4, c.y-5, tern(p.holding == nil, 5,9))
         end
-        ::__::
+    else
+        draw_target(c.x-4, c.y-5, 6)
     end
 
     -- self
@@ -163,18 +160,12 @@ function player_main_action(p)
     if p.holding != nil then
         place_holding(p)
     else
-        -- pick up
         if (can_hold(p)) then
-            -- todo: use registered target instead ^ see todo above
-            for o in group("holdable") do
-                if is_within_range(p,o) then
-                    pick_up(p,o)
-                    goto _
-                end
+            local c = target_cell(p)
+            if c.obj != nil and contains(c.obj.regs, "holdable") then
+                pick_up(p,c.obj)
             end
         end
-
-        ::_::
     end
 end 
 
@@ -182,12 +173,21 @@ function place_holding(p)
     local c = target_cell(p)
     if not is_cell_invalid(c) then
         holding_o = p.holding
-        if c.obj != nil and not c.obj.submittable then
-            pick_up(p, c.obj)
+        if c.obj != nil then 
+            if c.obj.submittable then
+                -- submit
+                submit_object(c.obj, p.holding)
+                p.holding = nil
+            else
+                -- swap
+                pick_up(p, c.obj)
+                register_object_at_cell(holding_o, c)
+            end
         else
+            -- drop
             p.holding = nil
+            register_object_at_cell(holding_o, c)
         end
-        register_object_at_cell(holding_o, c)
     end
 end
 
@@ -206,8 +206,4 @@ end
 
 function can_hold(p)
     return get_form(p) == "_adult"
-end
-
-function is_within_range(p,o)
-   return v_dist({x=p.x+tern(p.faceleft, -3, 3), y=p.y},o) < 10
 end

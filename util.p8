@@ -94,6 +94,7 @@ function dist(xa,ya) return sqrt(sqrdist(xa,ya)) end
 function sqrdist(x,y) return x*x+y*y end
 function frnd(a) return flr(rnd(a)) end
 function sqr(a) return a*a end
+function contains(xs,e) for x in all(xs) do if x == e then return e end end return nil end 
 
 -- OBJECT UTIL
 
