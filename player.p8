@@ -132,6 +132,8 @@ function draw_player(p)
             draw_target(c.x-4, c.y-5, tern(h == nil, 7, 12))
         elseif c.obj.name == "portal"  then
             draw_target(c.x-4, c.y-5, tern(p.holding == nil, 5,9))
+        else
+            draw_target(c.x-4, c.y-5, 5)
         end
     else
         draw_target(c.x-4, c.y-5, 6)
@@ -178,7 +180,7 @@ function place_holding(p)
                 -- submit
                 submit_object(c.obj, p.holding)
                 p.holding = nil
-            else
+            elseif contains(c.obj.regs, "holdable") then
                 -- swap
                 pick_up(p, c.obj)
                 register_object_at_cell(holding_o, c)

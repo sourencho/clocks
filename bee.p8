@@ -18,7 +18,7 @@ function create_bee(x, y)
         decy=0.6,
         animt=0,
         name="bee",
-        regs={"to_update", "to_draw4", "hit_clock", "collides"},
+        regs={"to_update", "to_draw4", "hit_clock"},
         faceleft=true,
         update=update_bee,
         draw=draw_self,

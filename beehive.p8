@@ -13,7 +13,7 @@ function create_beehive(x, y)
         animt=0,
         name="beehive",
         state="idle",
-        regs={"to_update", "to_draw2", "hit_clock", "holdable"},
+        regs={"to_update", "to_draw2", "hit_clock"},
         draw=draw_self,
         update=update_immune,
         hit_clock=hit_clock_beehive,

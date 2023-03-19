@@ -1,14 +1,12 @@
 SPAWN_RATE = 6
-
-spawntime = 0
-
--- SPAWN WEIGHTS
 spawn_weights = {
     {0.4, create_tree},
     {0.2, create_season},
     {0.1, create_beehive},
     {0.3, create_flower}
 }
+
+spawntime = 0
 
 function get_spawn_func()
     r = rnd()
