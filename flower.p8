@@ -60,5 +60,6 @@ function hit_bee_flower(t, b)
         cloud_particles(b.x, b.y-1, 0.5, {3,4}, 8, {7})
         deregister_grid_object(t)
         deregister_grid_object(b)
+        create_honey(t.x,t.y)
     end
 end

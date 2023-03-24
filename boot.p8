@@ -3,7 +3,7 @@ version 38
 __lua__
 #include config.p8
 #include coroutine.p8
-#include mouse.p8
+-- #include mouse.p8
 #include main.p8
 #include object.p8
 #include physics.p8
@@ -18,9 +18,10 @@ __lua__
 #include util.p8
 #include clock.p8
 #include tree.p8
+#include honey.p8
 #include fruit.p8
 #include season.p8
-#include sider.p8
+-- #include sider.p8
 #include portal.p8
 #include bee.p8
 #include beehive.p8

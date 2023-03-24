@@ -1,4 +1,4 @@
-function create_fruit(x, y, type)
+function create_honey(x, y)
     local c = get_cell(x, y)
     if (is_cell_invalid(c)) then
         draw_over_obj_cors[cocreate(draw_square_cor)] = {x=j*8,y=i*8,s=7,c=8}
@@ -18,12 +18,12 @@ function create_fruit(x, y, type)
         h=4,
         animt=0,
         faceleft=true,
-        name="fruit",
-        state=type,
+        name="honey",
+        state="idle",
         regs={"to_update","to_draw2", "hit_clock", "holdable"},
-        update=update_fruit,
+        update=update_honey,
         draw=draw_self,
-        hit_clock=hit_clock_fruit,
+        hit_clock=hit_clock_honey,
         immune=false,
         immune_until=0,
         i=i,
@@ -35,14 +35,14 @@ function create_fruit(x, y, type)
     register_grid_object(t, c.i, c.j)
 end
 
-function update_fruit(t)
+function update_honey(t)
     update_animt(t)
 
     -- immunitiy
     t.immune = time() < t.immune_until
 end
 
-function hit_clock_fruit(o, c)
+function hit_clock_honey(o, c)
     if (not o.immune) then
         cloud_particles(o.x, o.y-1, 0.5, {3,4}, 8, {7})
         deregister_grid_object(o)

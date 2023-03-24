@@ -19,7 +19,8 @@ GRID_INVALIDS = {{7,7}, {7,8}, {8,7}, {8,8}}
 points={
     tree_tree=1,
     flower_bloom=1,
-    fruit_orange=2
+    fruit_orange=2,
+    honey_idle=3
 }
 
 -- OBJECT
@@ -115,28 +116,28 @@ anim_info={
             dt=0.05
         }
     },
-    sider={
-        egg={
-            sprites={16},
-            dt=0.1,
-        },
-        side3={
-            sprites={1,2},
-            dt=0.1,
-        },
-        side4={
-            sprites={17,18},
-            dt=0.1,
-        },
-        side6={
-            sprites={49,50},
-            dt=0.1,
-        },
-        side41={
-            sprites={35},
-            dt=0.1,
-        }
-    },
+    -- sider={
+    --     egg={
+    --         sprites={16},
+    --         dt=0.1,
+    --     },
+    --     side3={
+    --         sprites={1,2},
+    --         dt=0.1,
+    --     },
+    --     side4={
+    --         sprites={17,18},
+    --         dt=0.1,
+    --     },
+    --     side6={
+    --         sprites={49,50},
+    --         dt=0.1,
+    --     },
+    --     side41={
+    --         sprites={35},
+    --         dt=0.1,
+    --     }
+    -- },
     bee={
         idle={
             sprites={115,116},
@@ -156,6 +157,12 @@ anim_info={
         },
         bloom={
             sprites={118},
+            dt=0.1
+        }
+    },
+    honey={
+        idle={
+            sprites={121},
             dt=0.1
         }
     }
