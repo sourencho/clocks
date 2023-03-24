@@ -26,8 +26,7 @@ function create_bee(x, y)
         immune=false,
         immune_until=0,
         i=i,
-        j=j,
-        target=nil,
+        j=j
     }
 
     make_immune(t, OBJ_IMMUNE_DUR)
@@ -36,20 +35,35 @@ function create_bee(x, y)
 end
 
 function update_bee(o)
-    if (o.target == nil) then
-        o.target = player
-    end
+    local targets = table_filter(
+        group_table("bee_target"),
+        function (x) return x.name != "flower" or (x.state == "bloom") end
+    )
 
+    local target = table_best(
+        targets,
+        function (x,y) return v_dist_sqr(x,o) < v_dist_sqr(y,o) end
+    )
 
     local movx,movy=0,0
-    local dir = v_normalize(v_subv(o.target, o))
+    local dist = v_dist_sqr(target, o)
+    local dir = v_normalize(v_subv(target, o))
     movx += dir.x * o.acc
     movy += dir.y * o.acc
     o.faceleft = dir.x < 0
-    update_movement(o,movx,movy,true,true)
+
+    if (dist > 4) then
+        update_movement(o,movx,movy,true,true)
+    end
 
     update_animt(o)
     update_immune(o)
+
+    local hits=all_collide_objgroup(o,"hit_bee",collide_objobj)
+    for h in all(hits) do
+        h:hit_bee(o)
+    end
+
 end
 
 function hit_clock_bee(o, c)

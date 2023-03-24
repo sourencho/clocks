@@ -1,9 +1,9 @@
 SPAWN_RATE = 6
 spawn_weights = {
-    {0.4, create_tree},
-    {0.2, create_season},
-    {0.1, create_beehive},
-    {0.3, create_flower}
+    {0.0, create_tree},
+    {0.0, create_season},
+    {0.4, create_beehive},
+    {0.6, create_flower}
 }
 
 spawntime = 0

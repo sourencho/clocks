@@ -24,11 +24,3 @@ function aabb_line_intersect(aabb, l)
         end
     end
 end
-
-function v_dist(v1, v2)
-    return sqrt(sqr(v2.x-v1.x)+sqr(v2.y-v1.y))
-end
-
-function v_dist_sqr(v1, v2)
-    return sqr(v2.x-v1.x)+sqr(v2.y-v1.y)
-end

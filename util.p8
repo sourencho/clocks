@@ -76,6 +76,17 @@ function table_sort(a,cmp)
     return a
 end
 
+function table_best(a, cmp)
+    local best = a[1]
+    if (#a == 1) return best
+    for i=2,#a do
+        if cmp(a[i], best) then
+            best = a[i]
+        end
+    end
+    return best
+end
+
 function table_concat(t1, t2)
     local tc = {}
     for i=1,#t1 do
@@ -85,6 +96,14 @@ function table_concat(t1, t2)
         tc[#t1+i] = t2[i]
     end
     return tc
+end
+
+function table_filter(table, f)
+    local t={}
+    for x in all(table) do 
+        if (f(x)) add(t,x)
+    end 
+    return t 
 end
 
 function tern(cond, T, F) if cond then return T else return F end end
@@ -124,4 +143,12 @@ end
 function v_normalize( v )
     local len = v_mag( v )
     return { x = v.x / len, y = v.y / len }
+end
+
+function v_dist(v1, v2)
+    return sqrt(sqr(v2.x-v1.x)+sqr(v2.y-v1.y))
+end
+
+function v_dist_sqr(v1, v2)
+    return sqr(v2.x-v1.x)+sqr(v2.y-v1.y)
 end

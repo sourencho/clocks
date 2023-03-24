@@ -15,7 +15,9 @@ function create_player(x, y)
         faceleft=true,
         name="player",
         state="idle_adult",
-        regs={"to_update","to_draw3", "player", "hit_clock", "collides"},
+        regs={
+            "to_update","to_draw3", "player", 
+            "hit_clock", "collides", "bee_target"},
         update=update_player,
         draw=draw_player,
         hit_clock=hit_clock_player,

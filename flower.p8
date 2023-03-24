@@ -17,10 +17,11 @@ function create_flower(x, y)
         state=states_flower[1],
         state_index = 1,
         regs={"to_update","to_draw2",
-              "hit_clock", "holdable"},
+              "hit_clock", "holdable", "bee_target", "hit_bee"},
         update=update_flower,
         draw=draw_self,
         hit_clock=hit_clock_flower,
+        hit_bee=hit_bee_flower,
         immune=false,
         immune_until=0,
         i=i,
@@ -50,5 +51,14 @@ function hit_clock_flower(t, c)
         else
             t.state = states_flower[t.state_index]
         end
+    end
+end
+
+function hit_bee_flower(t, b)
+    if (t.state == "bloom") then
+        cloud_particles(t.x, t.y-1, 0.5, {3,4}, 8, {7})
+        cloud_particles(b.x, b.y-1, 0.5, {3,4}, 8, {7})
+        deregister_grid_object(t)
+        deregister_grid_object(b)
     end
 end

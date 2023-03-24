@@ -27,6 +27,8 @@ objs={
     player={},
     collides={},
     holdable={},
+    bee_target={},
+    hit_bee={},
     hit_clock={},
     hit_player={},
     to_update={},
@@ -34,7 +36,7 @@ objs={
     to_draw1={},
     to_draw2={},
     to_draw3={},
-    to_draw4={}
+    to_draw4={},
 }
 
 -- ANIMATION
