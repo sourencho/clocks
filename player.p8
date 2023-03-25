@@ -209,5 +209,6 @@ function get_form(p)
 end
 
 function can_hold(p)
-    return get_form(p) == "_adult"
+    return true
+    -- return get_form(p) == "_adult"
 end

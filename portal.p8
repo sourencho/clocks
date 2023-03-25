@@ -29,35 +29,6 @@ end
 
 function draw_portal(p)
     draw_self(p)
-
-    -- local won = false
-
-    -- goal
-
-    -- local j = 1
-    -- local won = true
-    -- for g in all(level_goal[curr_level]) do
-        
-    --     local count = 0
-    --     for s in all(p.submitted) do
-    --         if (s.name == g[1] and s.state == g[2]) count += 1
-    --     end
-
-    --     spr(anim_info[g[1]][g[2]].sprites[1], 0, 8+j*10)
-    --     print(count, 2, 19+j*10, 6)
-    --     print(g[3], 2, 27+j*10, 5)
-
-    --     won = won and count >= g[3]
-
-    --     j += 3
-    -- end
-
-    -- if (won) then
-    --     curr_level += 1
-    --     game_state = "change_level"
-    -- end
-
-    -- UI
     print(p.score, 2, 2, 6)
 end
 

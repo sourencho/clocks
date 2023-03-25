@@ -20,7 +20,8 @@ function create_beehive(x, y)
         immune=false,
         immune_until=0,
         i=i,
-        j=j
+        j=j,
+        lives=3
     }
 
     make_immune(t, OBJ_IMMUNE_DUR)
@@ -37,6 +38,12 @@ function hit_clock_beehive(o, c)
 
         create_bee(o.x + 8, o.y)
 
-        --deregister_grid_object(o)
+        o.lives -= 1
+        if o.lives <= 0 then
+            cloud_particles(o.x, o.y-1, 0.5, {3,4}, 8, {7})
+            deregister_grid_object(o)
+        else
+            create_text(o.x,o.y,o.lives,7,0)
+        end
     end
 end

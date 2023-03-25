@@ -24,7 +24,8 @@ function create_season(x, y)
         immune_until=0,
         rained = false,
         i=i,
-        j=j
+        j=j,
+        lives=3,
     }
 
     make_immune(t, OBJ_IMMUNE_DUR)
@@ -49,10 +50,18 @@ function hit_clock_season(o, c)
         -- noop
     else
         make_immune(o, OBJ_IMMUNE_DUR)
-        add_shake(1)
+        cloud_particles(o.x, o.y-1, 0.5, {3,4}, 8, {7})
 
         o.state_index = o.state_index % #states_season + 1
         o.state = states_season[o.state_index]
         o.rained = false
+
+        o.lives -= 1
+        if o.lives <= 0 then
+            cloud_particles(o.x, o.y-1, 0.5, {3,4}, 8, {7})
+            deregister_grid_object(o)
+        else
+            create_text(o.x,o.y,o.lives,7,0)
+        end
     end
 end
