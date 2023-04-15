@@ -1,17 +1,24 @@
-function init_grid(start_x, start_y, width, height)
+function init_grid(start_x, start_y, width, height, clock)
     grid = {}
     for i=0,15 do
         grid[i] = {}
         for j=0,15 do
+            local x,y = j*8+4,i*8+4
             local e = {
                 i=i,
                 j=j,
-                x=j*8+4,
-                y=i*8+4,
+                x=x,
+                y=y,
                 obj=nil,
                 valid=(
                     j >= start_x and j < start_x+width and 
                     i >= start_y and i < start_y+height
+                ),
+                no_spawn =(
+                    v_dist(
+                        clock,
+                        {x=x,y=y}
+                    ) < clock.r
                 )
             }
             grid[i][j] = e
@@ -29,7 +36,7 @@ function draw_grid_debug()
             local e = grid[i][j]
             local c = 6
             if (e.obj != nil) c = 12
-            circ(e.x, e.y, 2, e.valid and c or 8)
+            circ(e.x, e.y, 2, e.valid and tern(e.no_spawn,c,10) or 8)
         end
     end
 
@@ -103,7 +110,7 @@ end
 -- todo: make this more efficient and deterministic
 function get_rnd_valid_grid_cell()
     c = grid[frnd(15)][frnd(15)]
-    while not c.valid or is_cell_occupied(c) do
+    while not c.valid or not c.no_spawn or is_cell_occupied(c) do
         c = grid[frnd(15)][frnd(15)]
     end
     return c

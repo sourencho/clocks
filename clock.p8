@@ -22,6 +22,8 @@ function create_clock(x,y,r,spd)
     create_wall(64,65,8,7,nil)
 
     register_object(c)
+
+    return c
 end
 
 function update_clock(c)
@@ -55,6 +57,6 @@ function get_line(c)
     return {{x=c.x, y=c.y}, {x=c.xe, y=c.ye}}
 end
 
-function draw_debug()
+function draw_debug(c)
     line(c.x, c.y, c.xe, c.ye, 8)
 end

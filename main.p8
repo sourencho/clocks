@@ -78,8 +78,12 @@ end
 
 function spawn_objects()
     player = create_player(24,24)
-    create_clock(64,64,44,CLOCK_SPEED)
-    init_grid(GRID_START_X, GRID_START_Y, GRID_WIDTH, GRID_HEIGHT)
+    clock = create_clock(64,64,44,CLOCK_SPEED)
+    init_grid(
+        GRID_START_X, GRID_START_Y,
+        GRID_WIDTH, GRID_HEIGHT,
+        clock
+    )
     create_portal(107,110)
     --spawn_map_sprites()
     --create_season(64+8+8, 32+8)

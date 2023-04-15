@@ -19,7 +19,7 @@ function draw_objects()
 
         if (SHOW_DEBUG_OBJ) then
             if (obj.draw_debug != nill) then
-                obj.draw_debug()
+                obj:draw_debug()
             end
         end
         end
