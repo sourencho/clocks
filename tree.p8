@@ -2,7 +2,7 @@ states_tree = {"bush", "tree", "tree_dry"}
 
 function create_tree(x, y)
     local c = get_cell(x, y)
-    if (is_cell_invalid(c)) then
+    if (is_cell_occupied(c)) then
         draw_over_obj_cors[cocreate(draw_square_cor)] = {x=c.j*8,y=c.i*8,s=7,c=8}
         return
     end

@@ -1,6 +1,6 @@
 function create_bee(x, y)
     local c = get_cell(x, y)
-    if (is_cell_invalid(c)) then
+    if (is_cell_occupied(c)) then
         draw_over_obj_cors[cocreate(draw_square_cor)] = {x=j*8,y=i*8,s=7,c=8}
         return
     end

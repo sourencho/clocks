@@ -45,6 +45,10 @@ function is_cell_invalid(c)
     return not c.valid
 end
 
+function is_cell_occupied(c)
+    return c.obj != nil
+end
+
 function get_cell(x, y)
     j,i = get_grid_coord(x,y)
     return grid[i][j]
@@ -52,7 +56,7 @@ end
 
 function maybe_snap_to_grid_and_register(o)
     local c = get_cell(o.x, o.y)
-    if (is_cell_invalid(c)) then
+    if (is_cell_occupied(c)) then
         draw_over_obj_cors[cocreate(draw_square_cor)] = {x=c.j*8,y=c.i*8,s=7,c=8}
         return false
     end
@@ -98,8 +102,8 @@ end
 
 -- todo: make this more efficient and deterministic
 function get_rnd_valid_grid_cell()
-    local c = {valid = false} 
-    while not c.valid do
+    c = grid[frnd(15)][frnd(15)]
+    while not c.valid or is_cell_occupied(c) do
         c = grid[frnd(15)][frnd(15)]
     end
     return c

@@ -83,7 +83,7 @@ function all_collide_objgroup(obj,groupname,coll_func)
 end
 
 function line_collide_objobj(obj1,obj2)
-    return aabb_line_intersect(obj2, obj1.get_line())
+    return aabb_line_intersect(obj2, obj1:get_line())
 end
 
 function draw_debug_coll(o)

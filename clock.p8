@@ -51,7 +51,7 @@ function draw_clock(c)
     circfill(64,64,3,7)
 end
 
-function get_line()
+function get_line(c)
     return {{x=c.x, y=c.y}, {x=c.xe, y=c.ye}}
 end
 

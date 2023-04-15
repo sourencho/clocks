@@ -28,8 +28,26 @@ function _update()
     update_objects()
     update_spawner()
 
-    menuitem(1, "restart level", function() game_state = "change_level" end)
-    menuitem(2, "skip level", function() curr_level += 1; game_state = "change_level"end)
+    menuitem(
+        1, 
+        "debug_grid",
+        function() SHOW_DEBUG_GRID = not SHOW_DEBUG_GRID end
+    )
+    menuitem(
+        2, 
+        "debug_obj",
+        function() SHOW_DEBUG_OBJ = not SHOW_DEBUG_OBJ end
+    )
+    menuitem(
+        3, 
+        "restart level",
+        function() game_state = "change_level" end
+    )
+    menuitem(
+        4,
+        "skip level",
+        function() curr_level += 1; game_state = "change_level"end
+    )
     --update_mouse(mouse)
 end
 

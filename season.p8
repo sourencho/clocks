@@ -2,7 +2,7 @@ states_season = {"summer", "cloud"}
 
 function create_season(x, y)
     local c = get_cell(x, y)
-    if (is_cell_invalid(c)) then
+    if (is_cell_occupied(c)) then
         draw_over_obj_cors[cocreate(draw_square_cor)] = {x=j*8,y=i*8,s=7,c=8}
         return
     end
@@ -25,7 +25,7 @@ function create_season(x, y)
         rained = false,
         i=i,
         j=j,
-        lives=3,
+        lives=2,
     }
 
     make_immune(t, OBJ_IMMUNE_DUR)
