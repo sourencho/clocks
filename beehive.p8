@@ -8,8 +8,8 @@ function create_beehive(x, y)
     local t = {
         x=x,
         y=y,
-        w=4,
-        h=4,
+        w=6,
+        h=6,
         animt=0,
         name="beehive",
         state="idle",

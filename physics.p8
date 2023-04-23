@@ -94,10 +94,18 @@ function draw_debug_coll(o)
         elseif o.name == "wall" then 
             c = 12 
         end
-        rect(o.x-o.w/2,o.y-o.h/2,o.x+o.w/2,o.y+o.h/2, c)
+        --rect(o.x-o.w/2,o.y-o.h/2,o.x+o.w/2,o.y+o.h/2, c)
         line(o.x-1,o.y,o.x+1,o.y, 11)
         line(o.x,o.y-1,o.x,o.y+1, 11)
+        draw_debug_aabb(o,c)
         --print(o.x.." "..o.y, o.x+3, o.y, 9)
+    end
+end
+
+function draw_debug_aabb(o,c)
+    p = aabb_points(o)
+    for i=1,4 do
+        line(p[i].x,p[i].y,p[(i%4)+1].x,p[(i%4)+1].y, c)
     end
 end
 
