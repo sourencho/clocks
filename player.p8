@@ -1,4 +1,3 @@
-
 function create_player(x, y)
     p = {
         x=x,
@@ -62,6 +61,7 @@ function update_player(p)
             player_main_action(p)
         end
 
+        --[[
         if btnp(4) then
             if (dir.x != 0 or dir.y != 0) then
                 movx = dir.x * p.acc * 4
@@ -75,7 +75,8 @@ function update_player(p)
             p.dashing_until = time() + 0.5
             --create_tree(p.x + tern(p.faceleft, -8, 8), p.y-1)
             --SHOW_DEBUG_OBJ = not SHOW_DEBUG_OBJ
-        end
+       end
+       --]]
 
         movx += dir.x * p.acc
         movy += dir.y * p.acc
@@ -148,6 +149,9 @@ function draw_player(p)
     elseif c.obj != nil then
         if contains(c.obj.regs, "holdable") then
             draw_target(c.x-4, c.y-5, tern(h == nil, 7, 12))
+            if c.obj.draw_hover != nil then
+                c.obj:draw_hover()
+            end
         elseif c.obj.name == "portal"  then
             draw_target(c.x-4, c.y-5, tern(p.holding == nil, 5,9))
         else

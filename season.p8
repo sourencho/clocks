@@ -26,6 +26,7 @@ function create_season(x, y)
         i=i,
         j=j,
         lives=2,
+        draw_hover=draw_hover
     }
 
     make_immune(t, OBJ_IMMUNE_DUR)
@@ -63,5 +64,11 @@ function hit_clock_season(o, c)
         else
             create_text(o.x,o.y,o.lives,7,0)
         end
+    end
+end
+
+function draw_hover(o)
+    for c in all(get_cells_around(o, 20)) do
+        pset(c.x-1, c.y-1, 7)
     end
 end

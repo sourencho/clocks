@@ -85,9 +85,14 @@ function draw_self(s)
               end
 
     -- foo + whiteframe
+    if (s.goldframe != nil and s.goldframe > 0 and t() % 1 < 0.1) then
+        all_colors_to(10)
+    end
+
     if (s.whiteframe != nil and s.whiteframe > 0 and t() % 0.1 < 0.01) then
         all_colors_to(s.flash_clr or 6)
     end
+
 
     foo(s)
 

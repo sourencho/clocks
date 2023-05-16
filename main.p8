@@ -86,9 +86,10 @@ function spawn_objects()
     )
     create_portal(107,110)
     --spawn_map_sprites()
-    --create_season(64+8+8, 32+8)
+    create_season(64+8+8, 32+8)
     --create_tree(64-16,32+16)
     --create_season(110, 108)
+    create_flower(50, 50)
 end
 
 function clear_objects()

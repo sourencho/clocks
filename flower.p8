@@ -19,11 +19,12 @@ function create_flower(x, y)
         regs={"to_update","to_draw2",
               "hit_clock", "holdable", "bee_target", "hit_bee"},
         update=update_flower,
-        draw=draw_self,
+        draw=draw_flower,
         hit_clock=hit_clock_flower,
         hit_bee=hit_bee_flower,
         immune=false,
         immune_until=0,
+        goldframe=0,
         i=i,
         j=j
     }
@@ -31,6 +32,19 @@ function create_flower(x, y)
     make_immune(t, OBJ_IMMUNE_DUR)
 
     register_grid_object(t, c.i, c.j)
+end
+
+function draw_flower(t)
+    draw_self(t)
+
+    t.goldframe = 0
+    if t.state == "sprout" then
+        for c in all(get_cells_around(t, 20)) do
+            if c.obj != nil and c.obj.name == "season" and c.obj.state == "summer" then
+                t.goldframe = 1
+            end
+        end
+    end
 end
 
 function update_flower(t)
@@ -45,7 +59,12 @@ function hit_clock_flower(t, c)
         make_immune(t, OBJ_IMMUNE_DUR)
 
         cloud_particles(t.x, t.y-1, 0.5, {3,4}, 8, {7})
-        t.state_index += 1
+        if (t.goldframe == 1) then
+            t.state_index += 1
+        else
+            t.state_index += 2
+        end
+
         if (t.state_index > #states_flower) then
             deregister_grid_object(t)
         else
