@@ -43,6 +43,14 @@ objs={
 -- ANIMATION
 anim_info={
     player={
+        idle_dead={
+            sprites={17},
+            dt=0.1
+        },
+        idle_baby={
+            sprites={1,2},
+            dt=0.2
+        },
         idle_adult={
             sprites={23, 24},
             dt=0.1
@@ -55,11 +63,11 @@ anim_info={
             sprites={21,22,21},
             dt=0.015
         },
-        idle_baby={
+        idle_kid={
             sprites={07, 08},
             dt=0.1
         },
-        run_baby={
+        run_kid={
             sprites={09,10,11,12,13},
             dt=0.015
         },

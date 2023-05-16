@@ -36,3 +36,12 @@ function aabb_line_intersect(aabb, l)
         end
     end
 end
+
+-- https://stackoverflow.com/a/3461533
+-- Returns true if target point c is in front of the line
+function onFrontSide(l_start, l_end, target)
+    return (
+        (l_end.x - l_start.x)*(target.y - l_start.y) -
+        (l_end.y - l_start.y)*(target.x - l_start.x)
+    ) > 0
+end

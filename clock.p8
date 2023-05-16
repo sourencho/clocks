@@ -35,7 +35,8 @@ function update_clock(c)
     -- collision
     local hits=all_collide_objgroup(c,"hit_clock",line_collide_objobj) 
     for h in all(hits) do
-        h:hit_clock(c)
+        onLeft = onFrontSide(get_line(c)[1], get_line(c)[2], h)
+        h:hit_clock(c, onLeft)
     end
 end
 

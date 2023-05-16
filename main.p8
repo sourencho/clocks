@@ -100,8 +100,12 @@ function clear_objects()
 end
 
 function draw_background()
-    b1_clr = tern(get_form(player) == "_baby", 2, 1)
+    b1_clr = tern(get_form(player) == "_baby", 12, 1)
     b2_clr = tern(get_form(player) == "_baby", 1, 0)
+
+    if get_form(player) == "_dead" then
+        b1_clr = 0
+    end
 
     -- Pattern made using https://seansleblanc.itch.io/pico-8-fillp-tool
     rectfill(-20,-20,148,148,b1_clr)

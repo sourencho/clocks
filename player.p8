@@ -28,8 +28,8 @@ function create_player(x, y)
         holding=nil,
         dashing=false,
         dashing_until=0,
-        forms={"_adult", "_baby"},
-        form_index=1
+        forms={"_baby", "_kid", "_adult", "_dead"},
+        form_index=2
     }
 
     register_object(p)
@@ -39,6 +39,11 @@ end
 
 function update_player(p)
     update_animt(p)
+
+    if p.state == "idle_dead" then
+        return
+    end
+
     local movx,movy=0,0
     local dir = {x=0,y=0}
 
@@ -71,10 +76,11 @@ function update_player(p)
             --create_tree(p.x + tern(p.faceleft, -8, 8), p.y-1)
             --SHOW_DEBUG_OBJ = not SHOW_DEBUG_OBJ
         end
-    end
 
-    movx += dir.x * p.acc
-    movy += dir.y * p.acc
+        movx += dir.x * p.acc
+        movy += dir.y * p.acc
+
+    end
 
     -- move
     update_movement(p,movx,movy,true,true)
@@ -82,16 +88,19 @@ function update_player(p)
     -- state
     local newstate
     local form = get_form(p)
-    if p.dashing then
-        newstate = "dash"..form
-    elseif abs(p.vx)>0.1 or abs(p.vy)>0.1 then
-        newstate = "run"..form
-    else
-        newstate = "idle"..form
-    end
 
-    if newstate ~= p.state then
-        p.state, p.animt = newstate, 0
+    if can_input(p) then
+        if p.dashing then
+            newstate = "dash"..form
+        elseif abs(p.vx)>0.1 or abs(p.vy)>0.1 then
+            newstate = "run"..form
+        else
+            newstate = "idle"..form
+        end
+
+        if newstate ~= p.state then
+            p.state, p.animt = newstate, 0
+        end
     end
 
     -- collision
@@ -108,7 +117,7 @@ function update_player(p)
 end
 
 function can_input(p)
-    return p.dashing == false
+    return p.state != "idle_baby" and p.state != "idle_dead"
 end
 
 function draw_player(p)
@@ -116,6 +125,13 @@ function draw_player(p)
     line(p.x-2, p.y+2, p.x+1, p.y+2, 0)
     line(p.x-3, p.y+3, p.x+2, p.y+3, 0)
     line(p.x-2, p.y+4, p.x+1, p.y+4, 0)
+
+    -- self
+    draw_self(p)
+
+    if p.state == "idle_dead" or p.state == "idle_baby" then
+        return
+    end
 
     -- draw holding
     local h = p.holding
@@ -141,11 +157,9 @@ function draw_player(p)
         draw_target(c.x-4, c.y-5, 6)
     end
 
-    -- self
-    draw_self(p)
 end
 
-function hit_clock_player(p, c)
+function hit_clock_player(p, c, inFront)
     if (p.immune) then 
     else
         make_immune(p, 1)
@@ -156,7 +170,15 @@ function hit_clock_player(p, c)
             p.holding = nil
         end
 
-        p.form_index = (p.form_index % #p.forms) + 1
+        new_index = p.form_index + tern(inFront, 1, -1)
+        if new_index == 0 then
+            printh("Game Over")
+        elseif new_index > #p.forms then
+            assert("Form out of bounds")
+        else
+            p.form_index = new_index;
+            p.state, p.animt = "idle"..get_form(p), 0
+        end
     end
 end
 

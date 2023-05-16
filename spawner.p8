@@ -1,4 +1,4 @@
-SPAWN_RATE = 2
+SPAWN_RATE = 4
 spawn_weights = {
     {0.4, create_tree},
     {0.1, create_season},
